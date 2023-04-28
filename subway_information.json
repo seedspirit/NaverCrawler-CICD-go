@@ -1,0 +1,118 @@
+{
+ "우이신설선": [
+  {
+   "naverCode": 11321,
+   "stationNm": "북한산우이역"
+  },
+  {
+   "naverCode": 11322,
+   "stationNm": "솔밭공원역"
+  },
+  {
+   "naverCode": 11323,
+   "stationNm": "4.19민주묘지역"
+  },
+  {
+   "naverCode": 11324,
+   "stationNm": "가오리역"
+  },
+  {
+   "naverCode": 11325,
+   "stationNm": "화계역"
+  },
+  {
+   "naverCode": 11326,
+   "stationNm": "삼양역"
+  },
+  {
+   "naverCode": 11327,
+   "stationNm": "삼양사거리역"
+  },
+  {
+   "naverCode": 11328,
+   "stationNm": "솔샘역"
+  },
+  {
+   "naverCode": 11329,
+   "stationNm": "북한산보국문역"
+  },
+  {
+   "naverCode": 11330,
+   "stationNm": "정릉역"
+  },
+  {
+   "naverCode": 11331,
+   "stationNm": "성신여대입구역"
+  },
+  {
+   "naverCode": 11332,
+   "stationNm": "보문역"
+  },
+  {
+   "naverCode": 11333,
+   "stationNm": "신설동역"
+  }
+ ],
+ "의정부경전철": [
+  {
+   "naverCode": 11001,
+   "stationNm": "발곡역"
+  },
+  {
+   "naverCode": 11002,
+   "stationNm": "회룡역"
+  },
+  {
+   "naverCode": 11003,
+   "stationNm": "범골역"
+  },
+  {
+   "naverCode": 11004,
+   "stationNm": "경전철의정부역"
+  },
+  {
+   "naverCode": 11005,
+   "stationNm": "의정부시청역"
+  },
+  {
+   "naverCode": 11006,
+   "stationNm": "흥선역"
+  },
+  {
+   "naverCode": 11007,
+   "stationNm": "의정부중앙역"
+  },
+  {
+   "naverCode": 11008,
+   "stationNm": "동오역"
+  },
+  {
+   "naverCode": 11009,
+   "stationNm": "새말역"
+  },
+  {
+   "naverCode": 11010,
+   "stationNm": "경기도청북부청사역"
+  },
+  {
+   "naverCode": 11011,
+   "stationNm": "효자역"
+  },
+  {
+   "naverCode": 11012,
+   "stationNm": "곤제역"
+  },
+  {
+   "naverCode": 11013,
+   "stationNm": "어룡역"
+  },
+  {
+   "naverCode": 11014,
+   "stationNm": "송산역"
+  },
+  {
+   "naverCode": 11015,
+   "stationNm": "탑석역"
+  }
+ ]
+}
