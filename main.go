@@ -5,23 +5,22 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/chromedp/cdproto/target"
 	"github.com/chromedp/chromedp"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
-type subwayData struct {
-	lineNum    string `json:"lineNum"`
-	weekTag    string `json:"weekTag"`
-	stationNm  string `json:"stationNm"`
-	inOutTag   string `json:"inOutTag"`
-	arriveTime string `json:"arriveTime"`
-}
-
-var data []subwayData
+var (
+	subwayData map[string]string
+	data       []map[string]string
+	mutex      = new(sync.Mutex)
+)
 
 // 최종적으로 정보를 저장할 파일 이름(년_월_일_timetable_호선이름.json)을 만드는 함수
 func makingFinalFileName(lineNum string) string {
@@ -41,113 +40,115 @@ func readStationINFO() map[string][]map[string]interface{} {
 	byteValue, _ := os.ReadFile(startFileName)
 	var INFO = map[string][]map[string]interface{}{}
 	err := json.Unmarshal(byteValue, &INFO)
-	if err != nil {
-		panic(err)
-	}
+	checkErr(err)
 	return INFO
 }
 
-// target인 호선과 그 호선의 naverCode, stationNm으로 이루어진 slice 반환하는 함수
-func extractTargetLine(INFO map[string][]map[string]interface{}) (string, []map[string]interface{}) {
-	// INFO에서 key(호선 명) 뽑아내기
-	keys := make([]string, len(INFO))
-	i := 0
-	for k := range INFO {
-		keys[i] = k
-		i++
-	}
-
-	lineNum := keys[0]
-	info, _ := INFO[lineNum]
-
-	return lineNum, info
-}
-
-// 크롤링을 위한 chromdp 인스턴스 생성하기 -> 타깃 페이지로 접근하기 (getPageHTML) -> 크롤링해서 정보 저장하기 (crawler)
-func runCrawler(URL string, lineNum string, stationNm string) {
+// chromedp context 생성 & waitnewtarget 설정 -> 크롤링해서 정보 저장
+func getPage(URL string, lineNum string, stationNm string) {
 	// settings for crawling
-
-	// create chrome instance
-	ctx, cancel := chromedp.NewContext(
+	contextVar, cancelFunc := chromedp.NewContext(
 		context.Background(),
-		chromedp.WithDebugf(log.Printf),
+		chromedp.WithLogf(log.Printf),
 	)
-	defer cancel()
+	defer cancelFunc()
 
-	// 크롤링 대상 페이지 가져오기
-	htmlContent, _ := getPageHTML(ctx, URL)
-
-	// 페이지 소스 크롤링 & 필요한 정보 추출
-	crawler(htmlContent, lineNum, stationNm)
-}
-
-// 네이버 검색창에 쿼리 날리기 & 클릭하여 시간표 진입한 후 그 페이지의 HTML 정보 가져오는 함수
-func getPageHTML(ctx context.Context, URL string) (string, error) {
 	var htmlContent string
-	time.Sleep(time.Second * 4)
-	err := chromedp.Run(ctx,
+
+	ch := chromedp.WaitNewTarget(contextVar, func(i *target.Info) bool {
+		return strings.Contains(i.URL, "/timetable/web/")
+	})
+
+	// 크롤링 대상 페이지에 접속하기 위해 URL 접속 -> 클릭
+	err := chromedp.Run(contextVar,
 		chromedp.Navigate(URL),
 		// 클릭해야 할 부분이 나올때까지 기다리기
-		chromedp.WaitVisible(".app"),
-		chromedp.Click("body > div.app > div > div > div > div.end_section.station_info_section > div.at_end.sofzqce > div.collapse_group_wrap.contents_collapse > div:nth-child(1)"),
-		chromedp.OuterHTML("html", &htmlContent, chromedp.ByQuery))
-
+		chromedp.WaitVisible(".end_footer_area"),
+		chromedp.Click("body > div.app > div > div > div > div.end_section.station_info_section > div.at_end.sofzqce > div > div.c10jv2ep.wrap_btn_schedule.schedule_time > button"),
+	)
 	checkErr(err)
-	return htmlContent, nil
+
+	// 클릭으로 새로운 탭이 생긴 곳으로 컨텍스트 옮기기 -> OuterHTML 추출
+	newContext, cancel := chromedp.NewContext(contextVar, chromedp.WithTargetID(<-ch))
+	defer cancel()
+	if err := chromedp.Run(newContext,
+		chromedp.WaitReady(".table_schedule", chromedp.ByQuery),
+		chromedp.OuterHTML(".schedule_wrap", &htmlContent, chromedp.ByQuery),
+	); err != nil {
+		panic(err)
+	}
+
+	// 페이지 소스 크롤링 & 필요한 정보 정리하기
+	crawler(htmlContent, lineNum, stationNm)
 }
 
 // 타깃 페이지 HTML에서 필요한 정보만 추출 후 정리하기
 func crawler(htmlContent string, lineNum string, stationNm string) {
-	doc, err := goquery.NewDocumentFromReader(strings.NewReader(htmlContent))
-	checkErr(err)
-
-	// 정보를 저장할 struct 인스턴스 생성 후 lineNum, stationNm 정보 기록
-	d := subwayData{}
-	d.lineNum = lineNum
-	d.stationNm = stationNm
+	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(htmlContent))
 
 	// weektag 알아내기 & d에 기록
-	weekTags := doc.Find(".item_day")
-	tag, _ := weekTags.Attr("\"aria-selected\" : \"true\"")
+	tag := doc.Find(".c1hj6oii.c92twem.btn_day.is_selected").Text()
 	switch tag {
 	case "평일":
-		d.weekTag = "1"
+		tag = "1"
 	case "토요일":
-		d.weekTag = "2"
+		tag = "2"
 	case "공휴일":
-		d.weekTag = "3"
+		tag = "3"
 	}
 
 	// inoutTag와 arriveTime 알아내서 d에 기록
 	doc.Find(".table_schedule > tbody > tr").Each(func(i int, tr *goquery.Selection) {
 		tr.Find("td").Each(func(j int, td *goquery.Selection) {
-			// inOutTag 정보 기록
-			switch j {
-			case 0:
-				d.inOutTag = "1" // 1: 상행
-			case 1:
-				d.inOutTag = "2" // 2: 하행
+			tmp := td.Find(".inner_timeline > .wrap_time > .time")
+			var arriveTime string
+
+			// 만약 빈 박스일 경우 무시 (for문 안이 아니라 continue는 못 씀)
+			if tmp.Text() == "" {
+				return
 			}
 
 			// arriveTime 정보 기록
-			tmp := td.Find(".inner_timeline > .wrap_time > .time")
-			if tmp != nil {
-				d.arriveTime = tmp.Text() + ":00"
+			arriveTime = tmp.Text() + ":00"
+
+			// inOutTag 정보 기록
+			var inOutTag string
+			switch j {
+			case 0:
+				inOutTag = "1" // 1: 상행
+			case 1:
+				inOutTag = "2" // 2: 하행
 			}
+
+			// 필요한 정보 모두 기록 & concurrent map writes 에러를 피하기 위한 mutex 설정
+			mutex.Lock()
+			subwayData = make(map[string]string)
+			subwayData["lineNum"] = lineNum
+			subwayData["stationNm"] = stationNm
+			subwayData["weekTag"] = tag
+			subwayData["arriveTime"] = arriveTime
+			subwayData["inOutTag"] = inOutTag
+
+			data = append(data, subwayData)
+			mutex.Unlock()
 		})
 	})
-	data = append(data, d)
+
 	fmt.Println(lineNum, "호선 ", stationNm, " - 입력 완료")
 
 }
 
 // struct를 json 형태로 변환 후 makingFileName에서 나온 이름으로 파일 쓰기
-func writeFile(fileName string, data []subwayData) {
+func writeFile(fileName string, data []map[string]string) {
+	// data가 struct 형태일때는 이상하게 marshal이 되더니, map으로 바꾸니까 한방에 marshal이 잘 됨. 이유가 뭘까?
 	content, err := json.Marshal(data)
+
 	if err != nil {
 		log.Fatalln("JSON marshaling failed: %s", err)
 	}
+
 	_ = os.WriteFile(fileName, content, 0644)
+
 }
 
 // 에러 체킹용 함수
@@ -157,26 +158,67 @@ func checkErr(err error) {
 	}
 }
 
+func runCrawler(val map[string]interface{}, baseURL string, lineNum string) {
+	// val안의 값들은 interface이기 때문에 type assertion 필요
+	naverCode := int(val["naverCode"].(float64)) // 왜인지 모르겠지만 처음 파일에서 interface로 값 가져올 때 float64로 가져와짐
+	stationNm := val["stationNm"].(string)
+	URL := baseURL + strconv.Itoa(naverCode) + "/home"
+	getPage(URL, lineNum, stationNm)
+}
+
 func main() {
+	start := time.Now()
+
 	// subway_information.json 파일 읽고, 안의 내용 파싱
 	INFO := readStationINFO()
 
-	// target인 호선과 그 호선의 naverCode, stationNm으로 이루어진 slice 반환
-	lineNum, info := extractTargetLine(INFO)
-	fmt.Println("타겟 라인 : ", lineNum)
+	// INFO에서 key(호선 명) 뽑아내기
+	targetLines := make([]string, 0, len(INFO)) // capacity 설정 0을 안 넣어주면 오류 나옴;;
+	for k := range INFO {
+		targetLines = append(targetLines, k)
+	}
+	sort.Strings(targetLines)
 
 	// 각 역의 정보를 바탕으로 크롤링 시작
 	var baseURL string = "https://pts.map.naver.com/end-subway/ends/web/"
-	for _, val := range info {
-		// val안의 값들은 interface이기 떄문에 type assertion 필요
-		naverCode := int(val["naverCode"].(float64)) // 왜인지 모르겠지만 처음 파일에서 interface로 값 가져올 때 float64로 가져와짐
-		stationNm := val["stationNm"].(string)
-		fmt.Println("네이버 코드 : ", naverCode, "역 이름 : ", stationNm, " 크롤링 시작")
-		URL := baseURL + strconv.Itoa(naverCode) + "/home"
-		runCrawler(URL, lineNum, stationNm)
+
+	for _, lineNum := range targetLines {
+		info, _ := INFO[lineNum] // info: target 호선의 naverCode, stationNm으로 이루어진 slice
+		fmt.Println("타겟 라인: ", lineNum, " 크롤링 시작")
+
+		// semaphore로 go 루틴 개수 20개로 제한, 각 go 루틴 실행 종료 시점 수집을 위한 채널 생성
+		sem := make(chan struct{}, 20)
+		done := make(chan struct{}, len(info))
+
+		for i, val := range info {
+			sem <- struct{}{} // semaphore를 획득하여 최대 go 루틴의 개수 제어
+
+			go func(val map[string]interface{}) {
+				runCrawler(val, baseURL, lineNum)
+				<-sem              // go 루틴이 종료되면 semaphore를 반환
+				done <- struct{}{} // go 루틴이 종료되었음을 알리기 위해 done 채널에 값 전송
+			}(val)
+
+			if (i+1)%20 == 0 { // 네이버 서버에 부담을 주지 않도록 고루틴 20개마다 sleep
+				for j := 0; j < 20; j++ {
+					<-done
+				}
+				fmt.Println("4초 휴식~")
+				time.Sleep(4 * time.Second)
+			}
+		}
+
+		// 모든 go 루틴이 종료될 때까지 done 채널에서 값 수신
+		for i := 0; i < len(info)%20; i++ {
+			<-done
+		}
+
+		// 정리한 정보를 json 파일 형식으로 저장 ("년_월_일_timetable_호선이름.json")
+		finalFilename := makingFinalFileName(lineNum)
+		writeFile(finalFilename, data)
 	}
 
-	// 정리한 정보를 json 파일 형식으로 저장 ("년_월_일_timetable_호선이름.json")
-	finalFilename := makingFinalFileName(lineNum)
-	writeFile(finalFilename, data)
+	end := time.Since(start)
+	fmt.Println("총 실행시간 : ", end)
+
 }
