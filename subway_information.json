@@ -1,0 +1,2888 @@
+{
+ "1호선": [
+  {
+   "naverCode": 100,
+   "stationNm": "소요산역"
+  },
+  {
+   "naverCode": 101,
+   "stationNm": "동두천역"
+  },
+  {
+   "naverCode": 102,
+   "stationNm": "보산역"
+  },
+  {
+   "naverCode": 103,
+   "stationNm": "동두천중앙역"
+  },
+  {
+   "naverCode": 104,
+   "stationNm": "지행역"
+  },
+  {
+   "naverCode": 105,
+   "stationNm": "덕정역"
+  },
+  {
+   "naverCode": 106,
+   "stationNm": "덕계역"
+  },
+  {
+   "naverCode": 107,
+   "stationNm": "양주역"
+  },
+  {
+   "naverCode": 108,
+   "stationNm": "녹양역"
+  },
+  {
+   "naverCode": 110,
+   "stationNm": "가능역"
+  },
+  {
+   "naverCode": 111,
+   "stationNm": "의정부역"
+  },
+  {
+   "naverCode": 112,
+   "stationNm": "회룡역"
+  },
+  {
+   "naverCode": 113,
+   "stationNm": "망월사역"
+  },
+  {
+   "naverCode": 114,
+   "stationNm": "도봉산역"
+  },
+  {
+   "naverCode": 115,
+   "stationNm": "도봉역"
+  },
+  {
+   "naverCode": 116,
+   "stationNm": "방학역"
+  },
+  {
+   "naverCode": 117,
+   "stationNm": "창동역"
+  },
+  {
+   "naverCode": 118,
+   "stationNm": "녹천역"
+  },
+  {
+   "naverCode": 119,
+   "stationNm": "월계역"
+  },
+  {
+   "naverCode": 120,
+   "stationNm": "광운대역"
+  },
+  {
+   "naverCode": 121,
+   "stationNm": "석계역"
+  },
+  {
+   "naverCode": 122,
+   "stationNm": "신이문역"
+  },
+  {
+   "naverCode": 123,
+   "stationNm": "외대앞역"
+  },
+  {
+   "naverCode": 124,
+   "stationNm": "회기역"
+  },
+  {
+   "naverCode": 125,
+   "stationNm": "청량리역"
+  },
+  {
+   "naverCode": 126,
+   "stationNm": "제기동역"
+  },
+  {
+   "naverCode": 127,
+   "stationNm": "신설동역"
+  },
+  {
+   "naverCode": 128,
+   "stationNm": "동대문역"
+  },
+  {
+   "naverCode": 129,
+   "stationNm": "종로5가역"
+  },
+  {
+   "naverCode": 130,
+   "stationNm": "종로3가역"
+  },
+  {
+   "naverCode": 131,
+   "stationNm": "종각역"
+  },
+  {
+   "naverCode": 132,
+   "stationNm": "시청역"
+  },
+  {
+   "naverCode": 133,
+   "stationNm": "서울역"
+  },
+  {
+   "naverCode": 134,
+   "stationNm": "남영역"
+  },
+  {
+   "naverCode": 135,
+   "stationNm": "용산역"
+  },
+  {
+   "naverCode": 136,
+   "stationNm": "노량진역"
+  },
+  {
+   "naverCode": 137,
+   "stationNm": "대방역"
+  },
+  {
+   "naverCode": 138,
+   "stationNm": "신길역"
+  },
+  {
+   "naverCode": 139,
+   "stationNm": "영등포역"
+  },
+  {
+   "naverCode": 140,
+   "stationNm": "신도림역"
+  },
+  {
+   "naverCode": 141,
+   "stationNm": "구로역"
+  },
+  {
+   "naverCode": 142,
+   "stationNm": "구일역"
+  },
+  {
+   "naverCode": 143,
+   "stationNm": "개봉역"
+  },
+  {
+   "naverCode": 144,
+   "stationNm": "오류동역"
+  },
+  {
+   "naverCode": 145,
+   "stationNm": "온수역"
+  },
+  {
+   "naverCode": 146,
+   "stationNm": "역곡역"
+  },
+  {
+   "naverCode": 147,
+   "stationNm": "소사역"
+  },
+  {
+   "naverCode": 148,
+   "stationNm": "부천역"
+  },
+  {
+   "naverCode": 149,
+   "stationNm": "중동역"
+  },
+  {
+   "naverCode": 150,
+   "stationNm": "송내역"
+  },
+  {
+   "naverCode": 151,
+   "stationNm": "부개역"
+  },
+  {
+   "naverCode": 152,
+   "stationNm": "부평역"
+  },
+  {
+   "naverCode": 153,
+   "stationNm": "백운역"
+  },
+  {
+   "naverCode": 154,
+   "stationNm": "동암역"
+  },
+  {
+   "naverCode": 155,
+   "stationNm": "간석역"
+  },
+  {
+   "naverCode": 156,
+   "stationNm": "주안역"
+  },
+  {
+   "naverCode": 157,
+   "stationNm": "도화역"
+  },
+  {
+   "naverCode": 158,
+   "stationNm": "제물포역"
+  },
+  {
+   "naverCode": 159,
+   "stationNm": "도원역"
+  },
+  {
+   "naverCode": 160,
+   "stationNm": "동인천역"
+  },
+  {
+   "naverCode": 161,
+   "stationNm": "인천역"
+  },
+  {
+   "naverCode": 172,
+   "stationNm": "가산디지털단지역"
+  },
+  {
+   "naverCode": 173,
+   "stationNm": "독산역"
+  },
+  {
+   "naverCode": 174,
+   "stationNm": "금천구청역"
+  },
+  {
+   "naverCode": 175,
+   "stationNm": "석수역"
+  },
+  {
+   "naverCode": 176,
+   "stationNm": "관악역"
+  },
+  {
+   "naverCode": 177,
+   "stationNm": "안양역"
+  },
+  {
+   "naverCode": 178,
+   "stationNm": "명학역"
+  },
+  {
+   "naverCode": 179,
+   "stationNm": "금정역"
+  },
+  {
+   "naverCode": 180,
+   "stationNm": "군포역"
+  },
+  {
+   "naverCode": 181,
+   "stationNm": "의왕역"
+  },
+  {
+   "naverCode": 182,
+   "stationNm": "성균관대역"
+  },
+  {
+   "naverCode": 183,
+   "stationNm": "화서역"
+  },
+  {
+   "naverCode": 184,
+   "stationNm": "수원역"
+  },
+  {
+   "naverCode": 185,
+   "stationNm": "세류역"
+  },
+  {
+   "naverCode": 186,
+   "stationNm": "병점역"
+  },
+  {
+   "naverCode": 187,
+   "stationNm": "세마역"
+  },
+  {
+   "naverCode": 188,
+   "stationNm": "오산대역"
+  },
+  {
+   "naverCode": 189,
+   "stationNm": "오산역"
+  },
+  {
+   "naverCode": 190,
+   "stationNm": "진위역"
+  },
+  {
+   "naverCode": 199,
+   "stationNm": "동묘앞역"
+  },
+  {
+   "naverCode": 1175,
+   "stationNm": "광명역"
+  },
+  {
+   "naverCode": 1181,
+   "stationNm": "당정역"
+  },
+  {
+   "naverCode": 1187,
+   "stationNm": "서동탄역"
+  },
+  {
+   "naverCode": 1401,
+   "stationNm": "송탄역"
+  },
+  {
+   "naverCode": 1402,
+   "stationNm": "서정리역"
+  },
+  {
+   "naverCode": 1403,
+   "stationNm": "평택지제역"
+  },
+  {
+   "naverCode": 1404,
+   "stationNm": "평택역"
+  },
+  {
+   "naverCode": 1405,
+   "stationNm": "성환역"
+  },
+  {
+   "naverCode": 1406,
+   "stationNm": "직산역"
+  },
+  {
+   "naverCode": 1407,
+   "stationNm": "두정역"
+  },
+  {
+   "naverCode": 1408,
+   "stationNm": "천안역"
+  },
+  {
+   "naverCode": 1409,
+   "stationNm": "봉명역"
+  },
+  {
+   "naverCode": 1410,
+   "stationNm": "쌍용역"
+  },
+  {
+   "naverCode": 1411,
+   "stationNm": "아산역"
+  },
+  {
+   "naverCode": 1412,
+   "stationNm": "탕정역"
+  },
+  {
+   "naverCode": 1413,
+   "stationNm": "배방역"
+  },
+  {
+   "naverCode": 1415,
+   "stationNm": "온양온천역"
+  },
+  {
+   "naverCode": 1416,
+   "stationNm": "신창역"
+  }
+ ],
+ "2호선": [
+  {
+   "naverCode": 201,
+   "stationNm": "시청역"
+  },
+  {
+   "naverCode": 202,
+   "stationNm": "을지로입구역"
+  },
+  {
+   "naverCode": 203,
+   "stationNm": "을지로3가역"
+  },
+  {
+   "naverCode": 204,
+   "stationNm": "을지로4가역"
+  },
+  {
+   "naverCode": 205,
+   "stationNm": "동대문역사문화공원역"
+  },
+  {
+   "naverCode": 206,
+   "stationNm": "신당역"
+  },
+  {
+   "naverCode": 207,
+   "stationNm": "상왕십리역"
+  },
+  {
+   "naverCode": 208,
+   "stationNm": "왕십리역"
+  },
+  {
+   "naverCode": 209,
+   "stationNm": "한양대역"
+  },
+  {
+   "naverCode": 210,
+   "stationNm": "뚝섬역"
+  },
+  {
+   "naverCode": 211,
+   "stationNm": "성수역"
+  },
+  {
+   "naverCode": 212,
+   "stationNm": "건대입구역"
+  },
+  {
+   "naverCode": 213,
+   "stationNm": "구의역"
+  },
+  {
+   "naverCode": 214,
+   "stationNm": "강변역"
+  },
+  {
+   "naverCode": 215,
+   "stationNm": "잠실나루역"
+  },
+  {
+   "naverCode": 216,
+   "stationNm": "잠실역"
+  },
+  {
+   "naverCode": 217,
+   "stationNm": "잠실새내역"
+  },
+  {
+   "naverCode": 218,
+   "stationNm": "종합운동장역"
+  },
+  {
+   "naverCode": 219,
+   "stationNm": "삼성역"
+  },
+  {
+   "naverCode": 220,
+   "stationNm": "선릉역"
+  },
+  {
+   "naverCode": 221,
+   "stationNm": "역삼역"
+  },
+  {
+   "naverCode": 222,
+   "stationNm": "강남역"
+  },
+  {
+   "naverCode": 223,
+   "stationNm": "교대역"
+  },
+  {
+   "naverCode": 224,
+   "stationNm": "서초역"
+  },
+  {
+   "naverCode": 225,
+   "stationNm": "방배역"
+  },
+  {
+   "naverCode": 226,
+   "stationNm": "사당역"
+  },
+  {
+   "naverCode": 227,
+   "stationNm": "낙성대역"
+  },
+  {
+   "naverCode": 228,
+   "stationNm": "서울대입구역"
+  },
+  {
+   "naverCode": 229,
+   "stationNm": "봉천역"
+  },
+  {
+   "naverCode": 230,
+   "stationNm": "신림역"
+  },
+  {
+   "naverCode": 231,
+   "stationNm": "신대방역"
+  },
+  {
+   "naverCode": 232,
+   "stationNm": "구로디지털단지역"
+  },
+  {
+   "naverCode": 233,
+   "stationNm": "대림역"
+  },
+  {
+   "naverCode": 234,
+   "stationNm": "신도림역"
+  },
+  {
+   "naverCode": 235,
+   "stationNm": "문래역"
+  },
+  {
+   "naverCode": 236,
+   "stationNm": "영등포구청역"
+  },
+  {
+   "naverCode": 237,
+   "stationNm": "당산역"
+  },
+  {
+   "naverCode": 238,
+   "stationNm": "합정역"
+  },
+  {
+   "naverCode": 239,
+   "stationNm": "홍대입구역"
+  },
+  {
+   "naverCode": 240,
+   "stationNm": "신촌역"
+  },
+  {
+   "naverCode": 241,
+   "stationNm": "이대역"
+  },
+  {
+   "naverCode": 242,
+   "stationNm": "아현역"
+  },
+  {
+   "naverCode": 243,
+   "stationNm": "충정로역"
+  },
+  {
+   "naverCode": 251,
+   "stationNm": "용답역"
+  },
+  {
+   "naverCode": 252,
+   "stationNm": "신답역"
+  },
+  {
+   "naverCode": 253,
+   "stationNm": "신설동역"
+  },
+  {
+   "naverCode": 254,
+   "stationNm": "용두역"
+  },
+  {
+   "naverCode": 261,
+   "stationNm": "도림천역"
+  },
+  {
+   "naverCode": 262,
+   "stationNm": "양천구청역"
+  },
+  {
+   "naverCode": 263,
+   "stationNm": "신정네거리역"
+  },
+  {
+   "naverCode": 264,
+   "stationNm": "까치산역"
+  }
+ ],
+ "3호선": [
+  {
+   "naverCode": 310,
+   "stationNm": "대화역"
+  },
+  {
+   "naverCode": 311,
+   "stationNm": "주엽역"
+  },
+  {
+   "naverCode": 312,
+   "stationNm": "정발산역"
+  },
+  {
+   "naverCode": 313,
+   "stationNm": "마두역"
+  },
+  {
+   "naverCode": 314,
+   "stationNm": "백석역"
+  },
+  {
+   "naverCode": 315,
+   "stationNm": "대곡역"
+  },
+  {
+   "naverCode": 316,
+   "stationNm": "화정역"
+  },
+  {
+   "naverCode": 317,
+   "stationNm": "원당역"
+  },
+  {
+   "naverCode": 318,
+   "stationNm": "삼송역"
+  },
+  {
+   "naverCode": 319,
+   "stationNm": "지축역"
+  },
+  {
+   "naverCode": 320,
+   "stationNm": "구파발역"
+  },
+  {
+   "naverCode": 321,
+   "stationNm": "연신내역"
+  },
+  {
+   "naverCode": 322,
+   "stationNm": "불광역"
+  },
+  {
+   "naverCode": 323,
+   "stationNm": "녹번역"
+  },
+  {
+   "naverCode": 324,
+   "stationNm": "홍제역"
+  },
+  {
+   "naverCode": 325,
+   "stationNm": "무악재역"
+  },
+  {
+   "naverCode": 326,
+   "stationNm": "독립문역"
+  },
+  {
+   "naverCode": 327,
+   "stationNm": "경복궁역"
+  },
+  {
+   "naverCode": 328,
+   "stationNm": "안국역"
+  },
+  {
+   "naverCode": 329,
+   "stationNm": "종로3가역"
+  },
+  {
+   "naverCode": 330,
+   "stationNm": "을지로3가역"
+  },
+  {
+   "naverCode": 331,
+   "stationNm": "충무로역"
+  },
+  {
+   "naverCode": 332,
+   "stationNm": "동대입구역"
+  },
+  {
+   "naverCode": 333,
+   "stationNm": "약수역"
+  },
+  {
+   "naverCode": 334,
+   "stationNm": "금호역"
+  },
+  {
+   "naverCode": 335,
+   "stationNm": "옥수역"
+  },
+  {
+   "naverCode": 336,
+   "stationNm": "압구정역"
+  },
+  {
+   "naverCode": 337,
+   "stationNm": "신사역"
+  },
+  {
+   "naverCode": 338,
+   "stationNm": "잠원역"
+  },
+  {
+   "naverCode": 339,
+   "stationNm": "고속터미널역"
+  },
+  {
+   "naverCode": 340,
+   "stationNm": "교대역"
+  },
+  {
+   "naverCode": 341,
+   "stationNm": "남부터미널역"
+  },
+  {
+   "naverCode": 342,
+   "stationNm": "양재역"
+  },
+  {
+   "naverCode": 343,
+   "stationNm": "매봉역"
+  },
+  {
+   "naverCode": 344,
+   "stationNm": "도곡역"
+  },
+  {
+   "naverCode": 345,
+   "stationNm": "대치역"
+  },
+  {
+   "naverCode": 346,
+   "stationNm": "학여울역"
+  },
+  {
+   "naverCode": 347,
+   "stationNm": "대청역"
+  },
+  {
+   "naverCode": 348,
+   "stationNm": "일원역"
+  },
+  {
+   "naverCode": 349,
+   "stationNm": "수서역"
+  },
+  {
+   "naverCode": 350,
+   "stationNm": "가락시장역"
+  },
+  {
+   "naverCode": 351,
+   "stationNm": "경찰병원역"
+  },
+  {
+   "naverCode": 352,
+   "stationNm": "오금역"
+  },
+  {
+   "naverCode": 370,
+   "stationNm": "원흥역"
+  }
+ ],
+ "4호선": [
+  {
+   "naverCode": 405,
+   "stationNm": "진접역"
+  },
+  {
+   "naverCode": 406,
+   "stationNm": "오남역"
+  },
+  {
+   "naverCode": 408,
+   "stationNm": "별내별가람역"
+  },
+  {
+   "naverCode": 409,
+   "stationNm": "당고개역"
+  },
+  {
+   "naverCode": 410,
+   "stationNm": "상계역"
+  },
+  {
+   "naverCode": 411,
+   "stationNm": "노원역"
+  },
+  {
+   "naverCode": 412,
+   "stationNm": "창동역"
+  },
+  {
+   "naverCode": 413,
+   "stationNm": "쌍문역"
+  },
+  {
+   "naverCode": 414,
+   "stationNm": "수유역"
+  },
+  {
+   "naverCode": 415,
+   "stationNm": "미아역"
+  },
+  {
+   "naverCode": 416,
+   "stationNm": "미아사거리역"
+  },
+  {
+   "naverCode": 417,
+   "stationNm": "길음역"
+  },
+  {
+   "naverCode": 418,
+   "stationNm": "성신여대입구역"
+  },
+  {
+   "naverCode": 419,
+   "stationNm": "한성대입구역"
+  },
+  {
+   "naverCode": 420,
+   "stationNm": "혜화역"
+  },
+  {
+   "naverCode": 421,
+   "stationNm": "동대문역"
+  },
+  {
+   "naverCode": 422,
+   "stationNm": "동대문역사문화공원역"
+  },
+  {
+   "naverCode": 423,
+   "stationNm": "충무로역"
+  },
+  {
+   "naverCode": 424,
+   "stationNm": "명동역"
+  },
+  {
+   "naverCode": 425,
+   "stationNm": "회현역"
+  },
+  {
+   "naverCode": 426,
+   "stationNm": "서울역"
+  },
+  {
+   "naverCode": 427,
+   "stationNm": "숙대입구역"
+  },
+  {
+   "naverCode": 428,
+   "stationNm": "삼각지역"
+  },
+  {
+   "naverCode": 429,
+   "stationNm": "신용산역"
+  },
+  {
+   "naverCode": 430,
+   "stationNm": "이촌역"
+  },
+  {
+   "naverCode": 431,
+   "stationNm": "동작역"
+  },
+  {
+   "naverCode": 432,
+   "stationNm": "총신대입구(이수)역"
+  },
+  {
+   "naverCode": 433,
+   "stationNm": "사당역"
+  },
+  {
+   "naverCode": 434,
+   "stationNm": "남태령역"
+  },
+  {
+   "naverCode": 435,
+   "stationNm": "선바위역"
+  },
+  {
+   "naverCode": 436,
+   "stationNm": "경마공원역"
+  },
+  {
+   "naverCode": 437,
+   "stationNm": "대공원역"
+  },
+  {
+   "naverCode": 438,
+   "stationNm": "과천역"
+  },
+  {
+   "naverCode": 439,
+   "stationNm": "정부과천청사역"
+  },
+  {
+   "naverCode": 440,
+   "stationNm": "인덕원역"
+  },
+  {
+   "naverCode": 441,
+   "stationNm": "평촌역"
+  },
+  {
+   "naverCode": 442,
+   "stationNm": "범계역"
+  },
+  {
+   "naverCode": 443,
+   "stationNm": "금정역"
+  },
+  {
+   "naverCode": 444,
+   "stationNm": "산본역"
+  },
+  {
+   "naverCode": 445,
+   "stationNm": "수리산역"
+  },
+  {
+   "naverCode": 446,
+   "stationNm": "대야미역"
+  },
+  {
+   "naverCode": 447,
+   "stationNm": "반월역"
+  },
+  {
+   "naverCode": 448,
+   "stationNm": "상록수역"
+  },
+  {
+   "naverCode": 449,
+   "stationNm": "한대앞역"
+  },
+  {
+   "naverCode": 450,
+   "stationNm": "중앙역"
+  },
+  {
+   "naverCode": 451,
+   "stationNm": "고잔역"
+  },
+  {
+   "naverCode": 452,
+   "stationNm": "초지역"
+  },
+  {
+   "naverCode": 453,
+   "stationNm": "안산역"
+  },
+  {
+   "naverCode": 454,
+   "stationNm": "신길온천역"
+  },
+  {
+   "naverCode": 455,
+   "stationNm": "정왕역"
+  },
+  {
+   "naverCode": 456,
+   "stationNm": "오이도역"
+  }
+ ],
+ "5호선": [
+  {
+   "naverCode": 510,
+   "stationNm": "방화역"
+  },
+  {
+   "naverCode": 511,
+   "stationNm": "개화산역"
+  },
+  {
+   "naverCode": 512,
+   "stationNm": "김포공항역"
+  },
+  {
+   "naverCode": 513,
+   "stationNm": "송정역"
+  },
+  {
+   "naverCode": 514,
+   "stationNm": "마곡역"
+  },
+  {
+   "naverCode": 515,
+   "stationNm": "발산역"
+  },
+  {
+   "naverCode": 516,
+   "stationNm": "우장산역"
+  },
+  {
+   "naverCode": 517,
+   "stationNm": "화곡역"
+  },
+  {
+   "naverCode": 518,
+   "stationNm": "까치산역"
+  },
+  {
+   "naverCode": 519,
+   "stationNm": "신정역"
+  },
+  {
+   "naverCode": 520,
+   "stationNm": "목동역"
+  },
+  {
+   "naverCode": 521,
+   "stationNm": "오목교역"
+  },
+  {
+   "naverCode": 522,
+   "stationNm": "양평역"
+  },
+  {
+   "naverCode": 523,
+   "stationNm": "영등포구청역"
+  },
+  {
+   "naverCode": 524,
+   "stationNm": "영등포시장역"
+  },
+  {
+   "naverCode": 525,
+   "stationNm": "신길역"
+  },
+  {
+   "naverCode": 526,
+   "stationNm": "여의도역"
+  },
+  {
+   "naverCode": 527,
+   "stationNm": "여의나루역"
+  },
+  {
+   "naverCode": 528,
+   "stationNm": "마포역"
+  },
+  {
+   "naverCode": 529,
+   "stationNm": "공덕역"
+  },
+  {
+   "naverCode": 530,
+   "stationNm": "애오개역"
+  },
+  {
+   "naverCode": 531,
+   "stationNm": "충정로역"
+  },
+  {
+   "naverCode": 532,
+   "stationNm": "서대문역"
+  },
+  {
+   "naverCode": 533,
+   "stationNm": "광화문역"
+  },
+  {
+   "naverCode": 534,
+   "stationNm": "종로3가역"
+  },
+  {
+   "naverCode": 535,
+   "stationNm": "을지로4가역"
+  },
+  {
+   "naverCode": 536,
+   "stationNm": "동대문역사문화공원역"
+  },
+  {
+   "naverCode": 537,
+   "stationNm": "청구역"
+  },
+  {
+   "naverCode": 538,
+   "stationNm": "신금호역"
+  },
+  {
+   "naverCode": 539,
+   "stationNm": "행당역"
+  },
+  {
+   "naverCode": 540,
+   "stationNm": "왕십리역"
+  },
+  {
+   "naverCode": 541,
+   "stationNm": "마장역"
+  },
+  {
+   "naverCode": 542,
+   "stationNm": "답십리역"
+  },
+  {
+   "naverCode": 543,
+   "stationNm": "장한평역"
+  },
+  {
+   "naverCode": 544,
+   "stationNm": "군자역"
+  },
+  {
+   "naverCode": 545,
+   "stationNm": "아차산역"
+  },
+  {
+   "naverCode": 546,
+   "stationNm": "광나루역"
+  },
+  {
+   "naverCode": 547,
+   "stationNm": "천호역"
+  },
+  {
+   "naverCode": 548,
+   "stationNm": "강동역"
+  },
+  {
+   "naverCode": 549,
+   "stationNm": "길동역"
+  },
+  {
+   "naverCode": 550,
+   "stationNm": "굽은다리역"
+  },
+  {
+   "naverCode": 551,
+   "stationNm": "명일역"
+  },
+  {
+   "naverCode": 552,
+   "stationNm": "고덕역"
+  },
+  {
+   "naverCode": 553,
+   "stationNm": "상일동역"
+  },
+  {
+   "naverCode": 554,
+   "stationNm": "강일역"
+  },
+  {
+   "naverCode": 555,
+   "stationNm": "미사역"
+  },
+  {
+   "naverCode": 556,
+   "stationNm": "하남풍산역"
+  },
+  {
+   "naverCode": 557,
+   "stationNm": "하남시청역"
+  },
+  {
+   "naverCode": 558,
+   "stationNm": "하남검단산역"
+  },
+  {
+   "naverCode": 569,
+   "stationNm": "둔촌동역"
+  },
+  {
+   "naverCode": 570,
+   "stationNm": "올림픽공원역"
+  },
+  {
+   "naverCode": 571,
+   "stationNm": "방이역"
+  },
+  {
+   "naverCode": 572,
+   "stationNm": "오금역"
+  },
+  {
+   "naverCode": 573,
+   "stationNm": "개롱역"
+  },
+  {
+   "naverCode": 574,
+   "stationNm": "거여역"
+  },
+  {
+   "naverCode": 575,
+   "stationNm": "마천역"
+  }
+ ],
+ "6호선": [
+  {
+   "naverCode": 610,
+   "stationNm": "응암역"
+  },
+  {
+   "naverCode": 611,
+   "stationNm": "역촌역"
+  },
+  {
+   "naverCode": 612,
+   "stationNm": "불광역"
+  },
+  {
+   "naverCode": 613,
+   "stationNm": "독바위역"
+  },
+  {
+   "naverCode": 614,
+   "stationNm": "연신내역"
+  },
+  {
+   "naverCode": 615,
+   "stationNm": "구산역"
+  },
+  {
+   "naverCode": 616,
+   "stationNm": "새절역"
+  },
+  {
+   "naverCode": 617,
+   "stationNm": "증산역"
+  },
+  {
+   "naverCode": 618,
+   "stationNm": "디지털미디어시티역"
+  },
+  {
+   "naverCode": 619,
+   "stationNm": "월드컵경기장역"
+  },
+  {
+   "naverCode": 620,
+   "stationNm": "마포구청역"
+  },
+  {
+   "naverCode": 621,
+   "stationNm": "망원역"
+  },
+  {
+   "naverCode": 622,
+   "stationNm": "합정역"
+  },
+  {
+   "naverCode": 623,
+   "stationNm": "상수역"
+  },
+  {
+   "naverCode": 624,
+   "stationNm": "광흥창역"
+  },
+  {
+   "naverCode": 625,
+   "stationNm": "대흥역"
+  },
+  {
+   "naverCode": 626,
+   "stationNm": "공덕역"
+  },
+  {
+   "naverCode": 627,
+   "stationNm": "효창공원앞역"
+  },
+  {
+   "naverCode": 628,
+   "stationNm": "삼각지역"
+  },
+  {
+   "naverCode": 629,
+   "stationNm": "녹사평역"
+  },
+  {
+   "naverCode": 630,
+   "stationNm": "이태원역"
+  },
+  {
+   "naverCode": 631,
+   "stationNm": "한강진역"
+  },
+  {
+   "naverCode": 632,
+   "stationNm": "버티고개역"
+  },
+  {
+   "naverCode": 633,
+   "stationNm": "약수역"
+  },
+  {
+   "naverCode": 634,
+   "stationNm": "청구역"
+  },
+  {
+   "naverCode": 635,
+   "stationNm": "신당역"
+  },
+  {
+   "naverCode": 636,
+   "stationNm": "동묘앞역"
+  },
+  {
+   "naverCode": 637,
+   "stationNm": "창신역"
+  },
+  {
+   "naverCode": 638,
+   "stationNm": "보문역"
+  },
+  {
+   "naverCode": 639,
+   "stationNm": "안암역"
+  },
+  {
+   "naverCode": 640,
+   "stationNm": "고려대역"
+  },
+  {
+   "naverCode": 641,
+   "stationNm": "월곡역"
+  },
+  {
+   "naverCode": 642,
+   "stationNm": "상월곡역"
+  },
+  {
+   "naverCode": 643,
+   "stationNm": "돌곶이역"
+  },
+  {
+   "naverCode": 644,
+   "stationNm": "석계역"
+  },
+  {
+   "naverCode": 645,
+   "stationNm": "태릉입구역"
+  },
+  {
+   "naverCode": 646,
+   "stationNm": "화랑대역"
+  },
+  {
+   "naverCode": 647,
+   "stationNm": "봉화산역"
+  },
+  {
+   "naverCode": 648,
+   "stationNm": "신내역"
+  }
+ ],
+ "7호선": [
+  {
+   "naverCode": 709,
+   "stationNm": "장암역"
+  },
+  {
+   "naverCode": 710,
+   "stationNm": "도봉산역"
+  },
+  {
+   "naverCode": 711,
+   "stationNm": "수락산역"
+  },
+  {
+   "naverCode": 712,
+   "stationNm": "마들역"
+  },
+  {
+   "naverCode": 713,
+   "stationNm": "노원역"
+  },
+  {
+   "naverCode": 714,
+   "stationNm": "중계역"
+  },
+  {
+   "naverCode": 715,
+   "stationNm": "하계역"
+  },
+  {
+   "naverCode": 716,
+   "stationNm": "공릉역"
+  },
+  {
+   "naverCode": 717,
+   "stationNm": "태릉입구역"
+  },
+  {
+   "naverCode": 718,
+   "stationNm": "먹골역"
+  },
+  {
+   "naverCode": 719,
+   "stationNm": "중화역"
+  },
+  {
+   "naverCode": 720,
+   "stationNm": "상봉역"
+  },
+  {
+   "naverCode": 721,
+   "stationNm": "면목역"
+  },
+  {
+   "naverCode": 722,
+   "stationNm": "사가정역"
+  },
+  {
+   "naverCode": 723,
+   "stationNm": "용마산역"
+  },
+  {
+   "naverCode": 724,
+   "stationNm": "중곡역"
+  },
+  {
+   "naverCode": 725,
+   "stationNm": "군자역"
+  },
+  {
+   "naverCode": 726,
+   "stationNm": "어린이대공원역"
+  },
+  {
+   "naverCode": 727,
+   "stationNm": "건대입구역"
+  },
+  {
+   "naverCode": 728,
+   "stationNm": "뚝섬유원지역"
+  },
+  {
+   "naverCode": 729,
+   "stationNm": "청담역"
+  },
+  {
+   "naverCode": 730,
+   "stationNm": "강남구청역"
+  },
+  {
+   "naverCode": 731,
+   "stationNm": "학동역"
+  },
+  {
+   "naverCode": 732,
+   "stationNm": "논현역"
+  },
+  {
+   "naverCode": 733,
+   "stationNm": "반포역"
+  },
+  {
+   "naverCode": 734,
+   "stationNm": "고속터미널역"
+  },
+  {
+   "naverCode": 735,
+   "stationNm": "내방역"
+  },
+  {
+   "naverCode": 736,
+   "stationNm": "이수역"
+  },
+  {
+   "naverCode": 737,
+   "stationNm": "남성역"
+  },
+  {
+   "naverCode": 738,
+   "stationNm": "숭실대입구역"
+  },
+  {
+   "naverCode": 739,
+   "stationNm": "상도역"
+  },
+  {
+   "naverCode": 740,
+   "stationNm": "장승배기역"
+  },
+  {
+   "naverCode": 741,
+   "stationNm": "신대방삼거리역"
+  },
+  {
+   "naverCode": 742,
+   "stationNm": "보라매역"
+  },
+  {
+   "naverCode": 743,
+   "stationNm": "신풍역"
+  },
+  {
+   "naverCode": 744,
+   "stationNm": "대림역"
+  },
+  {
+   "naverCode": 745,
+   "stationNm": "남구로역"
+  },
+  {
+   "naverCode": 746,
+   "stationNm": "가산디지털단지역"
+  },
+  {
+   "naverCode": 747,
+   "stationNm": "철산역"
+  },
+  {
+   "naverCode": 748,
+   "stationNm": "광명사거리역"
+  },
+  {
+   "naverCode": 749,
+   "stationNm": "천왕역"
+  },
+  {
+   "naverCode": 750,
+   "stationNm": "온수역"
+  },
+  {
+   "naverCode": 751,
+   "stationNm": "까치울역"
+  },
+  {
+   "naverCode": 752,
+   "stationNm": "부천종합운동장역"
+  },
+  {
+   "naverCode": 753,
+   "stationNm": "춘의역"
+  },
+  {
+   "naverCode": 754,
+   "stationNm": "신중동역"
+  },
+  {
+   "naverCode": 755,
+   "stationNm": "부천시청역"
+  },
+  {
+   "naverCode": 756,
+   "stationNm": "상동역"
+  },
+  {
+   "naverCode": 757,
+   "stationNm": "삼산체육관역"
+  },
+  {
+   "naverCode": 758,
+   "stationNm": "굴포천역"
+  },
+  {
+   "naverCode": 759,
+   "stationNm": "부평구청역"
+  },
+  {
+   "naverCode": 760,
+   "stationNm": "산곡역"
+  },
+  {
+   "naverCode": 761,
+   "stationNm": "석남역"
+  }
+ ],
+ "8호선": [
+  {
+   "naverCode": 810,
+   "stationNm": "암사역"
+  },
+  {
+   "naverCode": 811,
+   "stationNm": "천호역"
+  },
+  {
+   "naverCode": 812,
+   "stationNm": "강동구청역"
+  },
+  {
+   "naverCode": 813,
+   "stationNm": "몽촌토성역"
+  },
+  {
+   "naverCode": 814,
+   "stationNm": "잠실역"
+  },
+  {
+   "naverCode": 815,
+   "stationNm": "석촌역"
+  },
+  {
+   "naverCode": 816,
+   "stationNm": "송파역"
+  },
+  {
+   "naverCode": 817,
+   "stationNm": "가락시장역"
+  },
+  {
+   "naverCode": 818,
+   "stationNm": "문정역"
+  },
+  {
+   "naverCode": 819,
+   "stationNm": "장지역"
+  },
+  {
+   "naverCode": 820,
+   "stationNm": "복정역"
+  },
+  {
+   "naverCode": 821,
+   "stationNm": "산성역"
+  },
+  {
+   "naverCode": 822,
+   "stationNm": "남한산성입구역"
+  },
+  {
+   "naverCode": 823,
+   "stationNm": "단대오거리역"
+  },
+  {
+   "naverCode": 824,
+   "stationNm": "신흥역"
+  },
+  {
+   "naverCode": 825,
+   "stationNm": "수진역"
+  },
+  {
+   "naverCode": 826,
+   "stationNm": "모란역"
+  },
+  {
+   "naverCode": 831,
+   "stationNm": "남위례역"
+  }
+ ],
+ "9호선": [
+  {
+   "naverCode": 901,
+   "stationNm": "개화역"
+  },
+  {
+   "naverCode": 902,
+   "stationNm": "김포공항역"
+  },
+  {
+   "naverCode": 903,
+   "stationNm": "공항시장역"
+  },
+  {
+   "naverCode": 904,
+   "stationNm": "신방화역"
+  },
+  {
+   "naverCode": 905,
+   "stationNm": "마곡나루역"
+  },
+  {
+   "naverCode": 906,
+   "stationNm": "양천향교역"
+  },
+  {
+   "naverCode": 907,
+   "stationNm": "가양역"
+  },
+  {
+   "naverCode": 908,
+   "stationNm": "증미역"
+  },
+  {
+   "naverCode": 909,
+   "stationNm": "등촌역"
+  },
+  {
+   "naverCode": 910,
+   "stationNm": "염창역"
+  },
+  {
+   "naverCode": 911,
+   "stationNm": "신목동역"
+  },
+  {
+   "naverCode": 912,
+   "stationNm": "선유도역"
+  },
+  {
+   "naverCode": 913,
+   "stationNm": "당산역"
+  },
+  {
+   "naverCode": 914,
+   "stationNm": "국회의사당역"
+  },
+  {
+   "naverCode": 915,
+   "stationNm": "여의도역"
+  },
+  {
+   "naverCode": 916,
+   "stationNm": "샛강역"
+  },
+  {
+   "naverCode": 917,
+   "stationNm": "노량진역"
+  },
+  {
+   "naverCode": 918,
+   "stationNm": "노들역"
+  },
+  {
+   "naverCode": 919,
+   "stationNm": "흑석역"
+  },
+  {
+   "naverCode": 920,
+   "stationNm": "동작역"
+  },
+  {
+   "naverCode": 921,
+   "stationNm": "구반포역"
+  },
+  {
+   "naverCode": 922,
+   "stationNm": "신반포역"
+  },
+  {
+   "naverCode": 923,
+   "stationNm": "고속터미널역"
+  },
+  {
+   "naverCode": 924,
+   "stationNm": "사평역"
+  },
+  {
+   "naverCode": 925,
+   "stationNm": "신논현역"
+  },
+  {
+   "naverCode": 926,
+   "stationNm": "언주역"
+  },
+  {
+   "naverCode": 927,
+   "stationNm": "선정릉역"
+  },
+  {
+   "naverCode": 928,
+   "stationNm": "삼성중앙역"
+  },
+  {
+   "naverCode": 929,
+   "stationNm": "봉은사역"
+  },
+  {
+   "naverCode": 930,
+   "stationNm": "종합운동장역"
+  },
+  {
+   "naverCode": 931,
+   "stationNm": "삼전역"
+  },
+  {
+   "naverCode": 932,
+   "stationNm": "석촌고분역"
+  },
+  {
+   "naverCode": 933,
+   "stationNm": "석촌역"
+  },
+  {
+   "naverCode": 934,
+   "stationNm": "송파나루역"
+  },
+  {
+   "naverCode": 935,
+   "stationNm": "한성백제역"
+  },
+  {
+   "naverCode": 936,
+   "stationNm": "올림픽공원역"
+  },
+  {
+   "naverCode": 937,
+   "stationNm": "둔촌오륜역"
+  },
+  {
+   "naverCode": 938,
+   "stationNm": "중앙보훈병원역"
+  }
+ ],
+ "경강선": [
+  {
+   "naverCode": 11221,
+   "stationNm": "판교역"
+  },
+  {
+   "naverCode": 11222,
+   "stationNm": "이매역"
+  },
+  {
+   "naverCode": 11223,
+   "stationNm": "삼동역"
+  },
+  {
+   "naverCode": 11224,
+   "stationNm": "경기광주역"
+  },
+  {
+   "naverCode": 11225,
+   "stationNm": "초월역"
+  },
+  {
+   "naverCode": 11226,
+   "stationNm": "곤지암역"
+  },
+  {
+   "naverCode": 11227,
+   "stationNm": "신둔도예촌역"
+  },
+  {
+   "naverCode": 11228,
+   "stationNm": "이천역"
+  },
+  {
+   "naverCode": 11229,
+   "stationNm": "부발역"
+  },
+  {
+   "naverCode": 11230,
+   "stationNm": "세종대왕릉역"
+  },
+  {
+   "naverCode": 11231,
+   "stationNm": "여주역"
+  }
+ ],
+ "경의중앙선": [
+  {
+   "naverCode": 191,
+   "stationNm": "청량리역"
+  },
+  {
+   "naverCode": 192,
+   "stationNm": "왕십리역"
+  },
+  {
+   "naverCode": 193,
+   "stationNm": "응봉역"
+  },
+  {
+   "naverCode": 195,
+   "stationNm": "옥수역"
+  },
+  {
+   "naverCode": 196,
+   "stationNm": "한남역"
+  },
+  {
+   "naverCode": 197,
+   "stationNm": "서빙고역"
+  },
+  {
+   "naverCode": 198,
+   "stationNm": "이촌역"
+  },
+  {
+   "naverCode": 1299,
+   "stationNm": "지평역"
+  },
+  {
+   "naverCode": 1300,
+   "stationNm": "용문역"
+  },
+  {
+   "naverCode": 1301,
+   "stationNm": "원덕역"
+  },
+  {
+   "naverCode": 1302,
+   "stationNm": "양평역"
+  },
+  {
+   "naverCode": 1303,
+   "stationNm": "아신역"
+  },
+  {
+   "naverCode": 1304,
+   "stationNm": "국수역"
+  },
+  {
+   "naverCode": 1305,
+   "stationNm": "신원역"
+  },
+  {
+   "naverCode": 1306,
+   "stationNm": "양수역"
+  },
+  {
+   "naverCode": 1307,
+   "stationNm": "운길산역"
+  },
+  {
+   "naverCode": 1308,
+   "stationNm": "팔당역"
+  },
+  {
+   "naverCode": 1309,
+   "stationNm": "도심역"
+  },
+  {
+   "naverCode": 1310,
+   "stationNm": "덕소역"
+  },
+  {
+   "naverCode": 1311,
+   "stationNm": "양정역"
+  },
+  {
+   "naverCode": 1312,
+   "stationNm": "도농역"
+  },
+  {
+   "naverCode": 1313,
+   "stationNm": "구리역"
+  },
+  {
+   "naverCode": 1314,
+   "stationNm": "양원역"
+  },
+  {
+   "naverCode": 1315,
+   "stationNm": "망우역"
+  },
+  {
+   "naverCode": 1316,
+   "stationNm": "중랑역"
+  },
+  {
+   "naverCode": 1317,
+   "stationNm": "회기역"
+  },
+  {
+   "naverCode": 1318,
+   "stationNm": "용산역"
+  },
+  {
+   "naverCode": 1390,
+   "stationNm": "상봉역"
+  },
+  {
+   "naverCode": 1394,
+   "stationNm": "오빈역"
+  },
+  {
+   "naverCode": 1606,
+   "stationNm": "효창공원앞역"
+  },
+  {
+   "naverCode": 1607,
+   "stationNm": "공덕역"
+  },
+  {
+   "naverCode": 1608,
+   "stationNm": "서강대역"
+  },
+  {
+   "naverCode": 1609,
+   "stationNm": "홍대입구역"
+  },
+  {
+   "naverCode": 1610,
+   "stationNm": "서울역"
+  },
+  {
+   "naverCode": 1611,
+   "stationNm": "신촌역"
+  },
+  {
+   "naverCode": 1612,
+   "stationNm": "가좌역"
+  },
+  {
+   "naverCode": 1613,
+   "stationNm": "디지털미디어시티역"
+  },
+  {
+   "naverCode": 1614,
+   "stationNm": "수색역"
+  },
+  {
+   "naverCode": 1615,
+   "stationNm": "화전역"
+  },
+  {
+   "naverCode": 1616,
+   "stationNm": "행신역"
+  },
+  {
+   "naverCode": 1617,
+   "stationNm": "능곡역"
+  },
+  {
+   "naverCode": 1618,
+   "stationNm": "대곡역"
+  },
+  {
+   "naverCode": 1619,
+   "stationNm": "곡산역"
+  },
+  {
+   "naverCode": 1620,
+   "stationNm": "백마역"
+  },
+  {
+   "naverCode": 1621,
+   "stationNm": "풍산역"
+  },
+  {
+   "naverCode": 1622,
+   "stationNm": "일산역"
+  },
+  {
+   "naverCode": 1623,
+   "stationNm": "탄현역"
+  },
+  {
+   "naverCode": 1624,
+   "stationNm": "운정역"
+  },
+  {
+   "naverCode": 1625,
+   "stationNm": "금릉역"
+  },
+  {
+   "naverCode": 1626,
+   "stationNm": "금촌역"
+  },
+  {
+   "naverCode": 1627,
+   "stationNm": "월롱역"
+  },
+  {
+   "naverCode": 1628,
+   "stationNm": "파주역"
+  },
+  {
+   "naverCode": 1629,
+   "stationNm": "문산역"
+  },
+  {
+   "naverCode": 1630,
+   "stationNm": "운천역"
+  },
+  {
+   "naverCode": 1631,
+   "stationNm": "임진강역"
+  },
+  {
+   "naverCode": 1635,
+   "stationNm": "강매역"
+  },
+  {
+   "naverCode": 1636,
+   "stationNm": "야당역"
+  }
+ ],
+ "경춘선": [
+  {
+   "naverCode": 1806,
+   "stationNm": "청량리역"
+  },
+  {
+   "naverCode": 1807,
+   "stationNm": "회기역"
+  },
+  {
+   "naverCode": 1808,
+   "stationNm": "중랑역"
+  },
+  {
+   "naverCode": 1809,
+   "stationNm": "광운대역"
+  },
+  {
+   "naverCode": 1810,
+   "stationNm": "상봉역"
+  },
+  {
+   "naverCode": 1811,
+   "stationNm": "망우역"
+  },
+  {
+   "naverCode": 1812,
+   "stationNm": "신내역"
+  },
+  {
+   "naverCode": 1813,
+   "stationNm": "갈매역"
+  },
+  {
+   "naverCode": 1814,
+   "stationNm": "별내역"
+  },
+  {
+   "naverCode": 1815,
+   "stationNm": "퇴계원역"
+  },
+  {
+   "naverCode": 1816,
+   "stationNm": "사릉역"
+  },
+  {
+   "naverCode": 1817,
+   "stationNm": "금곡역"
+  },
+  {
+   "naverCode": 1818,
+   "stationNm": "평내호평역"
+  },
+  {
+   "naverCode": 1819,
+   "stationNm": "천마산역"
+  },
+  {
+   "naverCode": 1820,
+   "stationNm": "마석역"
+  },
+  {
+   "naverCode": 1821,
+   "stationNm": "대성리역"
+  },
+  {
+   "naverCode": 1822,
+   "stationNm": "청평역"
+  },
+  {
+   "naverCode": 1823,
+   "stationNm": "상천역"
+  },
+  {
+   "naverCode": 1824,
+   "stationNm": "가평역"
+  },
+  {
+   "naverCode": 1825,
+   "stationNm": "굴봉산역"
+  },
+  {
+   "naverCode": 1826,
+   "stationNm": "백양리역"
+  },
+  {
+   "naverCode": 1827,
+   "stationNm": "강촌역"
+  },
+  {
+   "naverCode": 1828,
+   "stationNm": "김유정역"
+  },
+  {
+   "naverCode": 1829,
+   "stationNm": "남춘천역"
+  },
+  {
+   "naverCode": 1830,
+   "stationNm": "춘천역"
+  }
+ ],
+ "공항철도": [
+  {
+   "naverCode": 4001,
+   "stationNm": "서울역"
+  },
+  {
+   "naverCode": 4002,
+   "stationNm": "공덕역"
+  },
+  {
+   "naverCode": 4003,
+   "stationNm": "홍대입구역"
+  },
+  {
+   "naverCode": 4004,
+   "stationNm": "디지털미디어시티역"
+  },
+  {
+   "naverCode": 4005,
+   "stationNm": "김포공항역"
+  },
+  {
+   "naverCode": 4006,
+   "stationNm": "계양역"
+  },
+  {
+   "naverCode": 4007,
+   "stationNm": "검암역"
+  },
+  {
+   "naverCode": 4008,
+   "stationNm": "운서역"
+  },
+  {
+   "naverCode": 4009,
+   "stationNm": "공항화물청사역"
+  },
+  {
+   "naverCode": 4010,
+   "stationNm": "인천공항1터미널역"
+  },
+  {
+   "naverCode": 4011,
+   "stationNm": "청라국제도시역"
+  },
+  {
+   "naverCode": 4012,
+   "stationNm": "영종역"
+  },
+  {
+   "naverCode": 4013,
+   "stationNm": "인천공항2터미널역"
+  },
+  {
+   "naverCode": 4020,
+   "stationNm": "마곡나루역"
+  }
+ ],
+ "김포골드라인": [
+  {
+   "naverCode": 11511,
+   "stationNm": "양촌역"
+  },
+  {
+   "naverCode": 11512,
+   "stationNm": "구래역"
+  },
+  {
+   "naverCode": 11513,
+   "stationNm": "마산역"
+  },
+  {
+   "naverCode": 11514,
+   "stationNm": "장기역"
+  },
+  {
+   "naverCode": 11515,
+   "stationNm": "운양역"
+  },
+  {
+   "naverCode": 11516,
+   "stationNm": "걸포북변역"
+  },
+  {
+   "naverCode": 11517,
+   "stationNm": "사우역"
+  },
+  {
+   "naverCode": 11518,
+   "stationNm": "풍무역"
+  },
+  {
+   "naverCode": 11519,
+   "stationNm": "고촌역"
+  },
+  {
+   "naverCode": 11520,
+   "stationNm": "김포공항역"
+  }
+ ],
+ "서해선": [
+  {
+   "naverCode": 11421,
+   "stationNm": "소사역"
+  },
+  {
+   "naverCode": 11422,
+   "stationNm": "소새울역"
+  },
+  {
+   "naverCode": 11423,
+   "stationNm": "시흥대야역"
+  },
+  {
+   "naverCode": 11424,
+   "stationNm": "신천역"
+  },
+  {
+   "naverCode": 11425,
+   "stationNm": "신현역"
+  },
+  {
+   "naverCode": 11427,
+   "stationNm": "시흥시청역"
+  },
+  {
+   "naverCode": 11428,
+   "stationNm": "시흥능곡역"
+  },
+  {
+   "naverCode": 11429,
+   "stationNm": "달미역"
+  },
+  {
+   "naverCode": 11430,
+   "stationNm": "선부역"
+  },
+  {
+   "naverCode": 11431,
+   "stationNm": "초지역"
+  },
+  {
+   "naverCode": 11432,
+   "stationNm": "시우역"
+  },
+  {
+   "naverCode": 11433,
+   "stationNm": "원시역"
+  }
+ ],
+ "수인분당선": [
+  {
+   "naverCode": 1509,
+   "stationNm": "청량리역"
+  },
+  {
+   "naverCode": 1510,
+   "stationNm": "왕십리역"
+  },
+  {
+   "naverCode": 1511,
+   "stationNm": "서울숲역"
+  },
+  {
+   "naverCode": 1512,
+   "stationNm": "압구정로데오역"
+  },
+  {
+   "naverCode": 1513,
+   "stationNm": "강남구청역"
+  },
+  {
+   "naverCode": 1514,
+   "stationNm": "선정릉역"
+  },
+  {
+   "naverCode": 1515,
+   "stationNm": "선릉역"
+  },
+  {
+   "naverCode": 1516,
+   "stationNm": "한티역"
+  },
+  {
+   "naverCode": 1517,
+   "stationNm": "도곡역"
+  },
+  {
+   "naverCode": 1518,
+   "stationNm": "구룡역"
+  },
+  {
+   "naverCode": 1519,
+   "stationNm": "개포동역"
+  },
+  {
+   "naverCode": 1520,
+   "stationNm": "대모산입구역"
+  },
+  {
+   "naverCode": 1521,
+   "stationNm": "수서역"
+  },
+  {
+   "naverCode": 1522,
+   "stationNm": "복정역"
+  },
+  {
+   "naverCode": 1523,
+   "stationNm": "가천대역"
+  },
+  {
+   "naverCode": 1524,
+   "stationNm": "태평역"
+  },
+  {
+   "naverCode": 1525,
+   "stationNm": "모란역"
+  },
+  {
+   "naverCode": 1526,
+   "stationNm": "야탑역"
+  },
+  {
+   "naverCode": 1527,
+   "stationNm": "이매역"
+  },
+  {
+   "naverCode": 1528,
+   "stationNm": "서현역"
+  },
+  {
+   "naverCode": 1529,
+   "stationNm": "수내역"
+  },
+  {
+   "naverCode": 1530,
+   "stationNm": "정자역"
+  },
+  {
+   "naverCode": 1531,
+   "stationNm": "미금역"
+  },
+  {
+   "naverCode": 1532,
+   "stationNm": "오리역"
+  },
+  {
+   "naverCode": 1533,
+   "stationNm": "보정역"
+  },
+  {
+   "naverCode": 1534,
+   "stationNm": "죽전역"
+  },
+  {
+   "naverCode": 1535,
+   "stationNm": "구성역"
+  },
+  {
+   "naverCode": 1536,
+   "stationNm": "신갈역"
+  },
+  {
+   "naverCode": 1537,
+   "stationNm": "기흥역"
+  },
+  {
+   "naverCode": 1538,
+   "stationNm": "상갈역"
+  },
+  {
+   "naverCode": 1539,
+   "stationNm": "청명역"
+  },
+  {
+   "naverCode": 1540,
+   "stationNm": "영통역"
+  },
+  {
+   "naverCode": 1541,
+   "stationNm": "망포역"
+  },
+  {
+   "naverCode": 1542,
+   "stationNm": "매탄권선역"
+  },
+  {
+   "naverCode": 1543,
+   "stationNm": "수원시청역"
+  },
+  {
+   "naverCode": 1544,
+   "stationNm": "매교역"
+  },
+  {
+   "naverCode": 1545,
+   "stationNm": "수원역"
+  },
+  {
+   "naverCode": 11109,
+   "stationNm": "고색역"
+  },
+  {
+   "naverCode": 11110,
+   "stationNm": "오목천역"
+  },
+  {
+   "naverCode": 11111,
+   "stationNm": "어천역"
+  },
+  {
+   "naverCode": 11112,
+   "stationNm": "야목역"
+  },
+  {
+   "naverCode": 11113,
+   "stationNm": "사리역"
+  },
+  {
+   "naverCode": 11114,
+   "stationNm": "한대앞역"
+  },
+  {
+   "naverCode": 11115,
+   "stationNm": "중앙역"
+  },
+  {
+   "naverCode": 11116,
+   "stationNm": "고잔역"
+  },
+  {
+   "naverCode": 11117,
+   "stationNm": "초지역"
+  },
+  {
+   "naverCode": 11118,
+   "stationNm": "안산역"
+  },
+  {
+   "naverCode": 11119,
+   "stationNm": "신길온천역"
+  },
+  {
+   "naverCode": 11120,
+   "stationNm": "정왕역"
+  },
+  {
+   "naverCode": 11121,
+   "stationNm": "오이도역"
+  },
+  {
+   "naverCode": 11122,
+   "stationNm": "월곶역"
+  },
+  {
+   "naverCode": 11123,
+   "stationNm": "소래포구역"
+  },
+  {
+   "naverCode": 11124,
+   "stationNm": "인천논현역"
+  },
+  {
+   "naverCode": 11125,
+   "stationNm": "호구포역"
+  },
+  {
+   "naverCode": 11126,
+   "stationNm": "남동인더스파크역"
+  },
+  {
+   "naverCode": 11127,
+   "stationNm": "원인재역"
+  },
+  {
+   "naverCode": 11128,
+   "stationNm": "연수역"
+  },
+  {
+   "naverCode": 11129,
+   "stationNm": "송도역"
+  },
+  {
+   "naverCode": 11131,
+   "stationNm": "인하대역"
+  },
+  {
+   "naverCode": 11132,
+   "stationNm": "숭의역"
+  },
+  {
+   "naverCode": 11133,
+   "stationNm": "신포역"
+  },
+  {
+   "naverCode": 11134,
+   "stationNm": "인천역"
+  },
+  {
+   "naverCode": 11150,
+   "stationNm": "달월역"
+  }
+ ],
+ "신림선": [
+  {
+   "naverCode": 11711,
+   "stationNm": "샛강역"
+  },
+  {
+   "naverCode": 11712,
+   "stationNm": "대방역"
+  },
+  {
+   "naverCode": 11713,
+   "stationNm": "서울지방병무청역"
+  },
+  {
+   "naverCode": 11714,
+   "stationNm": "보라매역"
+  },
+  {
+   "naverCode": 11715,
+   "stationNm": "보라매공원역"
+  },
+  {
+   "naverCode": 11716,
+   "stationNm": "보라매병원역"
+  },
+  {
+   "naverCode": 11717,
+   "stationNm": "당곡역"
+  },
+  {
+   "naverCode": 11718,
+   "stationNm": "신림역"
+  },
+  {
+   "naverCode": 11719,
+   "stationNm": "서원역"
+  },
+  {
+   "naverCode": 11720,
+   "stationNm": "서울대벤처타운역"
+  },
+  {
+   "naverCode": 11721,
+   "stationNm": "관악산역"
+  }
+ ],
+ "신분당선": [
+  {
+   "naverCode": 1907,
+   "stationNm": "신사역"
+  },
+  {
+   "naverCode": 1908,
+   "stationNm": "논현역"
+  },
+  {
+   "naverCode": 1909,
+   "stationNm": "신논현역"
+  },
+  {
+   "naverCode": 1910,
+   "stationNm": "강남역"
+  },
+  {
+   "naverCode": 1911,
+   "stationNm": "양재역"
+  },
+  {
+   "naverCode": 1912,
+   "stationNm": "양재시민의숲역"
+  },
+  {
+   "naverCode": 1913,
+   "stationNm": "청계산입구역"
+  },
+  {
+   "naverCode": 1914,
+   "stationNm": "판교역"
+  },
+  {
+   "naverCode": 1915,
+   "stationNm": "정자역"
+  },
+  {
+   "naverCode": 1916,
+   "stationNm": "미금역"
+  },
+  {
+   "naverCode": 1917,
+   "stationNm": "동천역"
+  },
+  {
+   "naverCode": 1918,
+   "stationNm": "수지구청역"
+  },
+  {
+   "naverCode": 1919,
+   "stationNm": "성복역"
+  },
+  {
+   "naverCode": 1920,
+   "stationNm": "상현역"
+  },
+  {
+   "naverCode": 1921,
+   "stationNm": "광교중앙역"
+  },
+  {
+   "naverCode": 1922,
+   "stationNm": "광교역"
+  }
+ ],
+ "에버라인": [
+  {
+   "naverCode": 1701,
+   "stationNm": "기흥역"
+  },
+  {
+   "naverCode": 1702,
+   "stationNm": "강남대역"
+  },
+  {
+   "naverCode": 1703,
+   "stationNm": "지석역"
+  },
+  {
+   "naverCode": 1704,
+   "stationNm": "어정역"
+  },
+  {
+   "naverCode": 1705,
+   "stationNm": "동백역"
+  },
+  {
+   "naverCode": 1706,
+   "stationNm": "초당역"
+  },
+  {
+   "naverCode": 1707,
+   "stationNm": "삼가역"
+  },
+  {
+   "naverCode": 1708,
+   "stationNm": "시청.용인대역"
+  },
+  {
+   "naverCode": 1709,
+   "stationNm": "명지대역"
+  },
+  {
+   "naverCode": 1710,
+   "stationNm": "김량장역"
+  },
+  {
+   "naverCode": 1711,
+   "stationNm": "운동장.송담대역"
+  },
+  {
+   "naverCode": 1712,
+   "stationNm": "고진역"
+  },
+  {
+   "naverCode": 1713,
+   "stationNm": "보평역"
+  },
+  {
+   "naverCode": 1714,
+   "stationNm": "둔전역"
+  },
+  {
+   "naverCode": 1715,
+   "stationNm": "전대.에버랜드역"
+  }
+ ],
+ "우이신설선": [
+  {
+   "naverCode": 11321,
+   "stationNm": "북한산우이역"
+  },
+  {
+   "naverCode": 11322,
+   "stationNm": "솔밭공원역"
+  },
+  {
+   "naverCode": 11323,
+   "stationNm": "4.19민주묘지역"
+  },
+  {
+   "naverCode": 11324,
+   "stationNm": "가오리역"
+  },
+  {
+   "naverCode": 11325,
+   "stationNm": "화계역"
+  },
+  {
+   "naverCode": 11326,
+   "stationNm": "삼양역"
+  },
+  {
+   "naverCode": 11327,
+   "stationNm": "삼양사거리역"
+  },
+  {
+   "naverCode": 11328,
+   "stationNm": "솔샘역"
+  },
+  {
+   "naverCode": 11329,
+   "stationNm": "북한산보국문역"
+  },
+  {
+   "naverCode": 11330,
+   "stationNm": "정릉역"
+  },
+  {
+   "naverCode": 11331,
+   "stationNm": "성신여대입구역"
+  },
+  {
+   "naverCode": 11332,
+   "stationNm": "보문역"
+  },
+  {
+   "naverCode": 11333,
+   "stationNm": "신설동역"
+  }
+ ],
+ "의정부경전철": [
+  {
+   "naverCode": 11001,
+   "stationNm": "발곡역"
+  },
+  {
+   "naverCode": 11002,
+   "stationNm": "회룡역"
+  },
+  {
+   "naverCode": 11003,
+   "stationNm": "범골역"
+  },
+  {
+   "naverCode": 11004,
+   "stationNm": "경전철의정부역"
+  },
+  {
+   "naverCode": 11005,
+   "stationNm": "의정부시청역"
+  },
+  {
+   "naverCode": 11006,
+   "stationNm": "흥선역"
+  },
+  {
+   "naverCode": 11007,
+   "stationNm": "의정부중앙역"
+  },
+  {
+   "naverCode": 11008,
+   "stationNm": "동오역"
+  },
+  {
+   "naverCode": 11009,
+   "stationNm": "새말역"
+  },
+  {
+   "naverCode": 11010,
+   "stationNm": "경기도청북부청사역"
+  },
+  {
+   "naverCode": 11011,
+   "stationNm": "효자역"
+  },
+  {
+   "naverCode": 11012,
+   "stationNm": "곤제역"
+  },
+  {
+   "naverCode": 11013,
+   "stationNm": "어룡역"
+  },
+  {
+   "naverCode": 11014,
+   "stationNm": "송산역"
+  },
+  {
+   "naverCode": 11015,
+   "stationNm": "탑석역"
+  }
+ ]
+}
