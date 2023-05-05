@@ -5,6 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/chromedp/cdproto/target"
 	"github.com/chromedp/chromedp"
 	"log"
@@ -23,15 +27,15 @@ var (
 )
 
 // 최종적으로 정보를 저장할 파일 이름(년_월_일_timetable_호선이름.json)을 만드는 함수
-func makingFinalFileName(lineNum string) string {
+func makingFinalFileName(lineNum string) (string, string) {
 	loc, err := time.LoadLocation("Asia/Seoul")
 	checkErr(err)
 	now := time.Now()
 	t := now.In(loc)
 	fileTime := t.Format("2006_01_02")
-	finalFileName := fileTime + "_timetable_" + lineNum + ".json"
-
-	return finalFileName
+	finalFileName := fileTime + "_timetable_" + lineNum + ".json" // s3에 업로드 될 최종 파일 이름
+	lambdaFileName := "/tmp/" + finalFileName                     // lambda에서 임시로 사용할 파일 이름
+	return lambdaFileName, finalFileName
 }
 
 // 파일 안 json 데이터를 파싱하여 golang 자료 구조에 맞게 변환
@@ -166,7 +170,30 @@ func runCrawler(val map[string]interface{}, baseURL string, lineNum string) {
 	getPage(URL, lineNum, stationNm)
 }
 
-func main() {
+func S3Uploader(lambdaFileName string, finalFileName string) (string, error) {
+	// 저장한 json 파일 s3에 업로드
+	sess := session.Must(session.NewSession())
+	uploader := s3manager.NewUploader(sess)
+	f, err := os.Open(lambdaFileName)
+	// file close 하는거 예약하기
+	defer f.Close()
+	if err != nil {
+		return "failed to open file", fmt.Errorf("%q, %v", finalFileName, err)
+	}
+
+	_, err = uploader.Upload(&s3manager.UploadInput{
+		Bucket: aws.String("bucketestmy"),
+		Key:    aws.String("bmt/" + finalFileName),
+		Body:   f,
+	})
+	if err != nil {
+		return "failed to upload file", fmt.Errorf("%v", err)
+	}
+	s3UploadResult := finalFileName + "file successfully uploaded in S3"
+	return s3UploadResult, nil
+}
+
+func HandleRequest(ctx context.Context) (string, error) {
 	start := time.Now()
 
 	// subway_information.json 파일 읽고, 안의 내용 파싱
@@ -179,7 +206,7 @@ func main() {
 	}
 	sort.Strings(targetLines)
 
-	// 각 역의 정보를 바탕으로 크롤링 시작
+	// 각 역의 정보를 바탕으로 크롤링 시작. for문을 돌며 호선 이름과 그 호선에 해당하는 역 정보 가져오고 -> 그거 바탕으로 크롤링
 	var baseURL string = "https://pts.map.naver.com/end-subway/ends/web/"
 
 	for _, lineNum := range targetLines {
@@ -204,7 +231,7 @@ func main() {
 				for j := 0; j < 20; j++ {
 					<-done
 				}
-				fmt.Println("4초 휴식~")
+				fmt.Println("--- 4초 휴식 ---")
 				time.Sleep(4 * time.Second)
 			}
 		}
@@ -215,11 +242,21 @@ func main() {
 		}
 
 		// 정리한 정보를 json 파일 형식으로 저장 ("년_월_일_timetable_호선이름.json")
-		finalFilename := makingFinalFileName(lineNum)
-		writeFile(finalFilename, data)
+		finalFilename, lambdaFileName := makingFinalFileName(lineNum)
+		writeFile(lambdaFileName, data)
+
+		// 파일을 S3에 업로드
+		s3UploadResult, _ := S3Uploader(lambdaFileName, finalFilename)
+		fmt.Println(s3UploadResult)
+
 	}
 
 	end := time.Since(start)
 	fmt.Println("총 실행시간 : ", end)
+	message := "NaverCrawler Successfully finished"
+	return message, nil
+}
 
+func main() {
+	lambda.Start(HandleRequest)
 }
