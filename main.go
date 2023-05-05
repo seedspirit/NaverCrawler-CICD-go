@@ -97,7 +97,7 @@ func crawler(htmlContent string, lineNum string, stationNm string) {
 		tag = "3"
 	}
 
-	// inoutTag와 arriveTime 알아내서 d에 기록
+	// 시간표를 순회하며 inoutTag와 arriveTime 알아내기 -> 필요한 정보 가공 후 map 형태로 저장
 	doc.Find(".table_schedule > tbody > tr").Each(func(i int, tr *goquery.Selection) {
 		tr.Find("td").Each(func(j int, td *goquery.Selection) {
 			tmp := td.Find(".inner_timeline > .wrap_time > .time")
@@ -183,7 +183,8 @@ func main() {
 	var baseURL string = "https://pts.map.naver.com/end-subway/ends/web/"
 
 	for _, lineNum := range targetLines {
-		info, _ := INFO[lineNum] // info: target 호선의 naverCode, stationNm으로 이루어진 slice
+		info, _ := INFO[lineNum]                       // info: target 호선의 naverCode, stationNm으로 이루어진 slice
+		data = make([]map[string]string, 0, len(info)) // 각 호선의 데이터만 담을 수 있도록 슬라이스 초기화
 		fmt.Println("타겟 라인: ", lineNum, " 크롤링 시작")
 
 		// semaphore로 go 루틴 개수 20개로 제한, 각 go 루틴 실행 종료 시점 수집을 위한 채널 생성
