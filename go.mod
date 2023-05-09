@@ -5,11 +5,11 @@ go 1.20
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/aws/aws-lambda-go v1.41.0
-	github.com/aws/aws-sdk-go v1.44.257
+	github.com/aws/aws-sdk-go v1.44.259
 	github.com/aws/aws-sdk-go-v2 v1.18.0
 	github.com/aws/aws-sdk-go-v2/config v1.18.24
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.33.1
-	github.com/chromedp/cdproto v0.0.0-20230502002814-67c6147a4636
+	github.com/chromedp/cdproto v0.0.0-20230506233603-4ea4c6dc2e5b
 	github.com/chromedp/chromedp v0.9.1
 )
 
