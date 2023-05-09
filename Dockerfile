@@ -17,7 +17,6 @@ RUN git clone https://github.com/seedspirit/NaverCrawler-CICD-go.git
 RUN cp NaverCrawler-CICD-go/main.go /var/task/
 RUN cp NaverCrawler-CICD-go/go.mod /var/task/
 RUN cp NaverCrawler-CICD-go/go.sum /var/task/
-RUN cp NaverCrawler-CICD-go/subway_information.json /var/task
 
 # cache dependencies
 RUN go mod download
@@ -25,4 +24,10 @@ RUN go build -o main .
 
 FROM public.ecr.aws/lambda/provided:al2
 COPY --from=build /var/task/main /var/task/main
+
+# Install Chrome dependencies
+RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -o chrome.rpm
+RUN yum install -y ./chrome.rpm
+RUN yum install -y fontconfig libX11 GConf2 dbus-x11
+
 ENTRYPOINT ["/var/task/main"]
