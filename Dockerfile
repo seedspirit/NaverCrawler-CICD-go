@@ -13,10 +13,11 @@ RUN go env -w GOPROXY=direct
 # Clone git, copying go.mod, go.sum, main.go
 WORKDIR /var/task/
 RUN yum install git -y
-RUN git clone https://github.com/Italian-BMT/naverCrawler-go.git
-RUN cp naverCrawler-go/main.go /var/task/
-RUN cp naverCrawler-go/go.mod /var/task/
-RUN cp naverCrawler-go/go.sum /var/task/
+RUN git clone https://github.com/seedspirit/NaverCrawler-CICD-go.git
+RUN cp NaverCrawler-CICD-go/main.go /var/task/
+RUN cp NaverCrawler-CICD-go/go.mod /var/task/
+RUN cp NaverCrawler-CICD-go/go.sum /var/task/
+RUN cp NaverCrawler-CICD-go/subway_information.json /var/task
 
 # cache dependencies
 RUN go mod download
