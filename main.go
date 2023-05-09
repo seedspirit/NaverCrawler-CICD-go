@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/chromedp/cdproto/target"
 	"github.com/chromedp/chromedp"
@@ -193,12 +194,42 @@ func S3Uploader(lambdaFileName string, finalFileName string) (string, error) {
 	return s3UploadResult, nil
 }
 
+func S3Downloader() (string, error) {
+	sess := session.Must(session.NewSession())
+	downloader := s3manager.NewDownloader(sess)
+	f, err := os.Create("subway_information.json")
+	defer f.Close()
+	if err != nil {
+		return "error: ", fmt.Errorf("failed to create file, %v", err)
+	}
+
+	numBytes, err := downloader.Download(f, &s3.GetObjectInput{
+		Bucket: aws.String("bucketestmy"),
+		Key:    aws.String("bmt/subway_information.json"),
+	})
+
+	if err != nil {
+		return "error: ", fmt.Errorf("failed to download file, %v", err)
+	}
+
+	fmt.Println("Downloaded", f.Name(), numBytes, "bytes")
+	s3DownloadResult := "file successfully downloaded from S3"
+
+	return s3DownloadResult, nil
+}
+
 func HandleRequest(ctx context.Context) (string, error) {
 	start := time.Now()
 
-	// subway_information.json 파일 읽고, 안의 내용 파싱
-	INFO := readStationINFO()
+	fmt.Println("S3에서 다운로드 시작")
+	s3DownloadResult, _ := S3Downloader()
+	fmt.Println(s3DownloadResult)
+	fmt.Println("s3에서 다운로드 끝")
 
+	// subway_information.json 파일 읽고, 안의 내용 파싱
+	fmt.Println("readStationINFO 시작")
+	INFO := readStationINFO()
+	fmt.Println("readStationINFO 끝")
 	// INFO에서 key(호선 명) 뽑아내기
 	targetLines := make([]string, 0, len(INFO)) // capacity 설정 0을 안 넣어주면 오류 나옴;;
 	for k := range INFO {
