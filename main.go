@@ -48,20 +48,40 @@ func makingFinalFileName(lineNum string) (string, string) {
 // chromedp context 생성 & waitnewtarget 설정 -> 크롤링해서 정보 저장
 func getPage(URL string, lineNum string, stationNm string) {
 	// settings for crawling
-	contextVar, cancelFunc := chromedp.NewContext(
+	ctx, cancle := chromedp.NewContext(
 		context.Background(),
 		chromedp.WithLogf(log.Printf),
 	)
-	defer cancelFunc()
+	defer cancle()
+
+	opts := []chromedp.ExecAllocatorOption{
+		chromedp.DisableGPU,
+		chromedp.NoSandbox,
+		chromedp.Headless,
+		chromedp.Flag("no-zygote", true),
+		chromedp.Flag("single-process", true),
+		chromedp.Flag("homedir", "/tmp"),
+		chromedp.Flag("data-path", "/tmp/data-path"),
+		chromedp.Flag("disk-cache-dir", "/tmp/cache-dir"),
+		chromedp.Flag("remote-debugging-port", "9222"),
+		chromedp.Flag("remote-debugging-address", "0.0.0.0"),
+		chromedp.Flag("disable-dev-shm-usage", true),
+	}
+
+	allocCtx, cancel := chromedp.NewExecAllocator(ctx, opts...)
+	defer cancel()
+
+	ctx, cancel = chromedp.NewContext(allocCtx, chromedp.WithLogf(log.Printf))
+	defer cancel()
 
 	var htmlContent string
 
-	ch := chromedp.WaitNewTarget(contextVar, func(i *target.Info) bool {
+	ch := chromedp.WaitNewTarget(ctx, func(i *target.Info) bool {
 		return strings.Contains(i.URL, "/timetable/web/")
 	})
 
 	// 크롤링 대상 페이지에 접속하기 위해 URL 접속 -> 클릭
-	err := chromedp.Run(contextVar,
+	err := chromedp.Run(ctx,
 		chromedp.Navigate(URL),
 		// 클릭해야 할 부분이 나올때까지 기다리기
 		chromedp.WaitVisible(".end_footer_area"),
@@ -70,7 +90,7 @@ func getPage(URL string, lineNum string, stationNm string) {
 	checkErr(err)
 
 	// 클릭으로 새로운 탭이 생긴 곳으로 컨텍스트 옮기기 -> OuterHTML 추출
-	newContext, cancel := chromedp.NewContext(contextVar, chromedp.WithTargetID(<-ch))
+	newContext, cancel := chromedp.NewContext(ctx, chromedp.WithTargetID(<-ch))
 	defer cancel()
 	if err := chromedp.Run(newContext,
 		chromedp.WaitReady(".table_schedule", chromedp.ByQuery),
@@ -217,8 +237,6 @@ func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, err
 
 func HandleRequest(ctx context.Context) (string, error) {
 	start := time.Now()
-
-	fmt.Println("S3에서 다운로드 시작")
 	sdkConfig, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		fmt.Println("Couldn't load default configuration. Have you set up your AWS account?")
@@ -228,7 +246,6 @@ func HandleRequest(ctx context.Context) (string, error) {
 	basics := BucketBasics{s3Client}
 	INFO, err := S3Downloader(basics)
 	checkErr(err)
-	fmt.Println("s3에서 다운로드 끝")
 
 	// INFO에서 key(호선 명) 뽑아내기
 	targetLines := make([]string, 0, len(INFO)) // capacity 설정 0을 안 넣어주면 오류 나옴;;
