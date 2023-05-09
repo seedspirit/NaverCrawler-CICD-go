@@ -30,4 +30,11 @@ RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.
 RUN yum install -y ./chrome.rpm
 RUN yum install -y fontconfig libX11 GConf2 dbus-x11
 
+# Create a writable directory for Chrome
+RUN mkdir /tmp/.com.google.Chrome
+RUN chmod 777 /tmp/.com.google.Chrome
+
+# Set the TMPDIR environment variable to /tmp
+ENV TMPDIR=/tmp
+
 ENTRYPOINT ["/var/task/main"]
