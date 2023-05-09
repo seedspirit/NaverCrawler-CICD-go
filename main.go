@@ -7,11 +7,13 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/chromedp/cdproto/target"
 	"github.com/chromedp/chromedp"
+	"io"
 	"log"
 	"os"
 	"sort"
@@ -27,6 +29,10 @@ var (
 	mutex      = new(sync.Mutex)
 )
 
+type BucketBasics struct {
+	S3Client *s3.Client
+}
+
 // 최종적으로 정보를 저장할 파일 이름(년_월_일_timetable_호선이름.json)을 만드는 함수
 func makingFinalFileName(lineNum string) (string, string) {
 	loc, err := time.LoadLocation("Asia/Seoul")
@@ -37,16 +43,6 @@ func makingFinalFileName(lineNum string) (string, string) {
 	finalFileName := fileTime + "_timetable_" + lineNum + ".json" // s3에 업로드 될 최종 파일 이름
 	lambdaFileName := "/tmp/" + finalFileName                     // lambda에서 임시로 사용할 파일 이름
 	return lambdaFileName, finalFileName
-}
-
-// 파일 안 json 데이터를 파싱하여 golang 자료 구조에 맞게 변환
-func readStationINFO() map[string][]map[string]interface{} {
-	startFileName := "subway_information.json"
-	byteValue, _ := os.ReadFile(startFileName)
-	var INFO = map[string][]map[string]interface{}{}
-	err := json.Unmarshal(byteValue, &INFO)
-	checkErr(err)
-	return INFO
 }
 
 // chromedp context 생성 & waitnewtarget 설정 -> 크롤링해서 정보 저장
@@ -194,42 +190,46 @@ func S3Uploader(lambdaFileName string, finalFileName string) (string, error) {
 	return s3UploadResult, nil
 }
 
-func S3Downloader() (string, error) {
-	sess := session.Must(session.NewSession())
-	downloader := s3manager.NewDownloader(sess)
-	f, err := os.Create("subway_information.json")
-	defer f.Close()
-	if err != nil {
-		return "error: ", fmt.Errorf("failed to create file, %v", err)
-	}
-
-	numBytes, err := downloader.Download(f, &s3.GetObjectInput{
+// S3에서 파일 다운로드 후 json 데이터를 파싱하여 golang 자료 구조에 맞게 변환
+func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, error) {
+	result, err := basics.S3Client.GetObject(context.TODO(), &s3.GetObjectInput{
 		Bucket: aws.String("bucketestmy"),
 		Key:    aws.String("bmt/subway_information.json"),
 	})
-
 	if err != nil {
-		return "error: ", fmt.Errorf("failed to download file, %v", err)
+		log.Printf("Couldn't get object. Here's why: %v\n", err)
+		return nil, err
 	}
 
-	fmt.Println("Downloaded", f.Name(), numBytes, "bytes")
-	s3DownloadResult := "file successfully downloaded from S3"
+	defer result.Body.Close()
 
-	return s3DownloadResult, nil
+	body, err := io.ReadAll(result.Body)
+	if err != nil {
+		log.Printf("failed to read response body: %v", err)
+		return nil, err
+	}
+
+	var INFO = map[string][]map[string]interface{}{}
+	err = json.Unmarshal(body, &INFO)
+	checkErr(err)
+	return INFO, nil
 }
 
 func HandleRequest(ctx context.Context) (string, error) {
 	start := time.Now()
 
 	fmt.Println("S3에서 다운로드 시작")
-	s3DownloadResult, _ := S3Downloader()
-	fmt.Println(s3DownloadResult)
+	sdkConfig, err := config.LoadDefaultConfig(context.TODO())
+	if err != nil {
+		fmt.Println("Couldn't load default configuration. Have you set up your AWS account?")
+		fmt.Println(err)
+	}
+	s3Client := s3.NewFromConfig(sdkConfig)
+	basics := BucketBasics{s3Client}
+	INFO, err := S3Downloader(basics)
+	checkErr(err)
 	fmt.Println("s3에서 다운로드 끝")
 
-	// subway_information.json 파일 읽고, 안의 내용 파싱
-	fmt.Println("readStationINFO 시작")
-	INFO := readStationINFO()
-	fmt.Println("readStationINFO 끝")
 	// INFO에서 key(호선 명) 뽑아내기
 	targetLines := make([]string, 0, len(INFO)) // capacity 설정 0을 안 넣어주면 오류 나옴;;
 	for k := range INFO {
