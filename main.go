@@ -55,17 +55,11 @@ func getPage(URL string, lineNum string, stationNm string) {
 	defer cancle()
 
 	opts := []chromedp.ExecAllocatorOption{
-		chromedp.DisableGPU,
-		chromedp.NoSandbox,
-		chromedp.Headless,
-		chromedp.Flag("no-zygote", true),
-		chromedp.Flag("single-process", true),
-		chromedp.Flag("homedir", "/tmp"),
-		chromedp.Flag("data-path", "/tmp/data-path"),
-		chromedp.Flag("disk-cache-dir", "/tmp/cache-dir"),
-		chromedp.Flag("remote-debugging-port", "9222"),
-		chromedp.Flag("remote-debugging-address", "0.0.0.0"),
+        	chromedp.NoSandbox,
+        	chromedp.Flag("disable-setuid-sandbox", true),
 		chromedp.Flag("disable-dev-shm-usage", true),
+		chromedp.Flag("single-process", true),
+		chromedp.Flag("no-zygote", true),
 	}
 
 	allocCtx, cancel := chromedp.NewExecAllocator(ctx, opts...)
