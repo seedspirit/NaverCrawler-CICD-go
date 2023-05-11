@@ -45,64 +45,6 @@ func makingFinalFileName(lineNum string) (string, string) {
 	return lambdaFileName, finalFileName
 }
 
-// chromedp context 생성 & waitnewtarget 설정 -> 크롤링해서 정보 저장
-func getPage(URL string, lineNum string, stationNm string) {
-	// settings for crawling
-	ctx, cancle := chromedp.NewContext(
-		context.Background(),
-		chromedp.WithLogf(log.Printf),
-	)
-	defer cancle()
-
-	opts := []chromedp.ExecAllocatorOption{
-		chromedp.DisableGPU,
-		chromedp.NoSandbox,
-		chromedp.Headless,
-		chromedp.Flag("no-zygote", true),
-		chromedp.Flag("single-process", true),
-		chromedp.Flag("homedir", "/tmp"),
-		chromedp.Flag("data-path", "/tmp/data-path"),
-		chromedp.Flag("disk-cache-dir", "/tmp/cache-dir"),
-		chromedp.Flag("remote-debugging-port", "9222"),
-		chromedp.Flag("remote-debugging-address", "0.0.0.0"),
-		chromedp.Flag("disable-dev-shm-usage", true),
-	}
-
-	allocCtx, cancel := chromedp.NewExecAllocator(ctx, opts...)
-	defer cancel()
-
-	ctx, cancel = chromedp.NewContext(allocCtx, chromedp.WithLogf(log.Printf))
-	defer cancel()
-
-	var htmlContent string
-
-	ch := chromedp.WaitNewTarget(ctx, func(i *target.Info) bool {
-		return strings.Contains(i.URL, "/timetable/web/")
-	})
-
-	// 크롤링 대상 페이지에 접속하기 위해 URL 접속 -> 클릭
-	err := chromedp.Run(ctx,
-		chromedp.Navigate(URL),
-		// 클릭해야 할 부분이 나올때까지 기다리기
-		chromedp.WaitVisible(".end_footer_area"),
-		chromedp.Click("body > div.app > div > div > div > div.end_section.station_info_section > div.at_end.sofzqce > div > div.c10jv2ep.wrap_btn_schedule.schedule_time > button"),
-	)
-	checkErr(err)
-
-	// 클릭으로 새로운 탭이 생긴 곳으로 컨텍스트 옮기기 -> OuterHTML 추출
-	newContext, cancel := chromedp.NewContext(ctx, chromedp.WithTargetID(<-ch))
-	defer cancel()
-	if err := chromedp.Run(newContext,
-		chromedp.WaitReady(".table_schedule", chromedp.ByQuery),
-		chromedp.OuterHTML(".schedule_wrap", &htmlContent, chromedp.ByQuery),
-	); err != nil {
-		panic(err)
-	}
-
-	// 페이지 소스 크롤링 & 필요한 정보 정리하기
-	crawler(htmlContent, lineNum, stationNm)
-}
-
 // 타깃 페이지 HTML에서 필요한 정보만 추출 후 정리하기
 func crawler(htmlContent string, lineNum string, stationNm string) {
 	doc, _ := goquery.NewDocumentFromReader(strings.NewReader(htmlContent))
@@ -235,7 +177,53 @@ func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, err
 	return INFO, nil
 }
 
-func HandleRequest(ctx context.Context) (string, error) {
+// chromedp context 생성 & waitnewtarget 설정 -> 크롤링해서 정보 저장
+func getPage(URL string, lineNum string, stationNm string) {
+	// settings for crawling
+	opts := []chromedp.ExecAllocatorOption{
+		chromedp.NoSandbox,
+		chromedp.Flag("disable-setuid-sandbox", true),
+		chromedp.Flag("disable-dev-shm-usage", true),
+		chromedp.Flag("single-process", true),
+		chromedp.Flag("no-zygote", true),
+	}
+
+	ctx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
+	defer cancel()
+
+	ctx, cancel = chromedp.NewContext(ctx, chromedp.WithDebugf(log.Printf))
+	defer cancel()
+
+	var htmlContent string
+
+	ch := chromedp.WaitNewTarget(ctx, func(i *target.Info) bool {
+		return strings.Contains(i.URL, "/timetable/web/")
+	})
+
+	// 크롤링 대상 페이지에 접속하기 위해 URL 접속 -> 클릭
+	err := chromedp.Run(ctx,
+		chromedp.Navigate(URL),
+		// 클릭해야 할 부분이 나올때까지 기다리기
+		chromedp.WaitVisible(".end_footer_area"),
+		chromedp.Click("body > div.app > div > div > div > div.end_section.station_info_section > div.at_end.sofzqce > div > div.c10jv2ep.wrap_btn_schedule.schedule_time > button"),
+	)
+	checkErr(err)
+
+	// 클릭으로 새로운 탭이 생긴 곳으로 컨텍스트 옮기기 -> OuterHTML 추출
+	newContext, cancel := chromedp.NewContext(ctx, chromedp.WithTargetID(<-ch))
+	defer cancel()
+	if err := chromedp.Run(newContext,
+		chromedp.WaitReady(".table_schedule", chromedp.ByQuery),
+		chromedp.OuterHTML(".schedule_wrap", &htmlContent, chromedp.ByQuery),
+	); err != nil {
+		panic(err)
+	}
+
+	// 페이지 소스 크롤링 & 필요한 정보 정리하기
+	crawler(htmlContent, lineNum, stationNm)
+}
+
+func HandleRequest(_ context.Context) (string, error) {
 	start := time.Now()
 	sdkConfig, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
@@ -306,5 +294,12 @@ func HandleRequest(ctx context.Context) (string, error) {
 }
 
 func main() {
-	lambda.Start(HandleRequest)
+	if _, exists := os.LookupEnv("AWS_LAMBDA_RUNTIME_API"); exists {
+		lambda.Start(HandleRequest)
+	} else {
+		_, err := HandleRequest(context.Background())
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }

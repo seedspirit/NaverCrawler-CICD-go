@@ -1,33 +1,25 @@
-FROM public.ecr.aws/lambda/provided:al2 AS build
+FROM golang:1.20.4-alpine3.17 AS builder
 
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64
 
-# Get rid of the extension warning
-RUN mkdir -p /opt/extensions
-RUN yum -y install golang
-RUN go env -w GOPROXY=direct
+WORKDIR /app
 
-# Clone git, copying go.mod, go.sum, main.go
-WORKDIR /var/task/
-RUN yum install git -y
-RUN git clone https://github.com/seedspirit/NaverCrawler-CICD-go.git
-RUN cp NaverCrawler-CICD-go/main.go /var/task/
-RUN cp NaverCrawler-CICD-go/go.mod /var/task/
-RUN cp NaverCrawler-CICD-go/go.sum /var/task/
-
-# cache dependencies
+COPY go.mod go.sum main.go ./
 RUN go mod download
-RUN go build -o main .
 
-FROM public.ecr.aws/lambda/provided:al2
-COPY --from=build /var/task/main /var/task/main
+COPY . .
 
-# Install Chrome dependencies
-RUN curl https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -o chrome.rpm && \
-    yum install -y ./chrome.rpm && \
-    yum install -y fontconfig libX11 GConf2 dbus-x11
+RUN go build -o main
 
-ENTRYPOINT ["/var/task/main"]
+FROM chromedp/headless-shell:113.0.5672.93
+
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+COPY --from=builder /app/main .
+
+ENTRYPOINT [ "./main" ]
