@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
@@ -180,18 +181,17 @@ func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, err
 // chromedp context 생성 & waitnewtarget 설정 -> 크롤링해서 정보 저장
 func getPage(URL string, lineNum string, stationNm string) {
 	// settings for crawling
-	opts := []chromedp.ExecAllocatorOption{
+	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.NoSandbox,
 		chromedp.Flag("disable-setuid-sandbox", true),
 		chromedp.Flag("disable-dev-shm-usage", true),
 		chromedp.Flag("single-process", true),
 		chromedp.Flag("no-zygote", true),
-	}
+	)
 
-	ctx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
-	defer cancel()
+	alloCtx, _ := chromedp.NewExecAllocator(context.Background(), opts...)
 
-	ctx, cancel = chromedp.NewContext(ctx, chromedp.WithDebugf(log.Printf))
+	ctx, cancel := chromedp.NewContext(alloCtx, chromedp.WithLogf(log.Printf))
 	defer cancel()
 
 	var htmlContent string
@@ -225,11 +225,18 @@ func getPage(URL string, lineNum string, stationNm string) {
 
 func HandleRequest(_ context.Context) (string, error) {
 	start := time.Now()
-	sdkConfig, err := config.LoadDefaultConfig(context.TODO())
-	if err != nil {
-		fmt.Println("Couldn't load default configuration. Have you set up your AWS account?")
-		fmt.Println(err)
-	}
+
+	staticProvider := credentials.NewStaticCredentialsProvider(
+		AWS_ACCESS_KEY,
+		AWS_SECRET_KEY,
+		"")
+
+	sdkConfig, err := config.LoadDefaultConfig(
+		context.Background(),
+		config.WithCredentialsProvider(staticProvider),
+	)
+	checkErr(err)
+
 	s3Client := s3.NewFromConfig(sdkConfig)
 	basics := BucketBasics{s3Client}
 	INFO, err := S3Downloader(basics)
@@ -251,7 +258,7 @@ func HandleRequest(_ context.Context) (string, error) {
 		fmt.Println("타겟 라인: ", lineNum, " 크롤링 시작")
 
 		// semaphore로 go 루틴 개수 20개로 제한, 각 go 루틴 실행 종료 시점 수집을 위한 채널 생성
-		sem := make(chan struct{}, 20)
+		sem := make(chan struct{}, 10)
 		done := make(chan struct{}, len(info))
 
 		for i, val := range info {
@@ -263,17 +270,17 @@ func HandleRequest(_ context.Context) (string, error) {
 				done <- struct{}{} // go 루틴이 종료되었음을 알리기 위해 done 채널에 값 전송
 			}(val)
 
-			if (i+1)%20 == 0 { // 네이버 서버에 부담을 주지 않도록 고루틴 20개마다 sleep
-				for j := 0; j < 20; j++ {
+			if (i+1)%10 == 0 { // 네이버 서버에 부담을 주지 않도록 고루틴 20개마다 sleep
+				for j := 0; j < 10; j++ {
 					<-done
 				}
-				fmt.Println("--- 4초 휴식 ---")
-				time.Sleep(4 * time.Second)
+				fmt.Println("--- 3초 휴식 ---")
+				time.Sleep(3 * time.Second)
 			}
 		}
 
 		// 모든 go 루틴이 종료될 때까지 done 채널에서 값 수신
-		for i := 0; i < len(info)%20; i++ {
+		for i := 0; i < len(info)%10; i++ {
 			<-done
 		}
 
