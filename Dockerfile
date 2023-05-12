@@ -7,6 +7,8 @@ ENV GO111MODULE=on \
 
 WORKDIR /app
 
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
+
 COPY go.mod go.sum main.go ./
 RUN go mod download
 
@@ -16,9 +18,9 @@ RUN go build -o main
 
 FROM chromedp/headless-shell:113.0.5672.93
 
-RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
-
 WORKDIR /app
+
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 COPY --from=builder /app/main .
 
