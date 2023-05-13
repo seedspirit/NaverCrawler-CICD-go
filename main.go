@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -10,8 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/chromedp/cdproto/target"
 	"github.com/chromedp/chromedp"
 	"io"
@@ -35,15 +34,14 @@ type BucketBasics struct {
 }
 
 // 최종적으로 정보를 저장할 파일 이름(년_월_일_timetable_호선이름.json)을 만드는 함수
-func makingFinalFileName(lineNum string) (string, string) {
+func makingFinalFileName(lineNum string) string {
 	loc, err := time.LoadLocation("Asia/Seoul")
 	checkErr(err)
 	now := time.Now()
 	t := now.In(loc)
 	fileTime := t.Format("2006_01_02")
 	finalFileName := fileTime + "_timetable_" + lineNum + ".json" // s3에 업로드 될 최종 파일 이름
-	lambdaFileName := "/tmp/" + finalFileName                     // lambda에서 임시로 사용할 파일 이름
-	return lambdaFileName, finalFileName
+	return finalFileName
 }
 
 // 타깃 페이지 HTML에서 필요한 정보만 추출 후 정리하기
@@ -102,19 +100,6 @@ func crawler(htmlContent string, lineNum string, stationNm string) {
 
 }
 
-// struct를 json 형태로 변환 후 makingFileName에서 나온 이름으로 파일 쓰기
-func writeFile(fileName string, data []map[string]string) {
-	// data가 struct 형태일때는 이상하게 marshal이 되더니, map으로 바꾸니까 한방에 marshal이 잘 됨. 이유가 뭘까?
-	content, err := json.Marshal(data)
-
-	if err != nil {
-		log.Fatalln("JSON marshaling failed: %s", err)
-	}
-
-	_ = os.WriteFile(fileName, content, 0644)
-
-}
-
 // 에러 체킹용 함수
 func checkErr(err error) {
 	if err != nil {
@@ -130,27 +115,25 @@ func runCrawler(val map[string]interface{}, baseURL string, lineNum string) {
 	getPage(URL, lineNum, stationNm)
 }
 
-func S3Uploader(lambdaFileName string, finalFileName string) (string, error) {
-	// 저장한 json 파일 s3에 업로드
-	sess := session.Must(session.NewSession())
-	uploader := s3manager.NewUploader(sess)
-	f, err := os.Open(lambdaFileName)
-	// file close 하는거 예약하기
-	defer f.Close()
+// struct를 json 형태로 변환 후 makingFileName에서 나온 이름으로 S3에 파일 업로드
+func S3Uploader(data []map[string]string, basics BucketBasics, finalFileName string) error {
+	// data가 struct 형태일때는 이상하게 marshal이 되더니, map으로 바꾸니까 한방에 marshal이 잘 됨. 이유가 뭘까?
+	content, err := json.Marshal(data)
 	if err != nil {
-		return "failed to open file", fmt.Errorf("%q, %v", finalFileName, err)
+		log.Fatalln("JSON marshaling failed: %s", err)
 	}
 
-	_, err = uploader.Upload(&s3manager.UploadInput{
+	// json 바이트 스트림을 S3에 업로드
+	_, err = basics.S3Client.PutObject(context.TODO(), &s3.PutObjectInput{
 		Bucket: aws.String("bucketestmy"),
 		Key:    aws.String("bmt/" + finalFileName),
-		Body:   f,
+		Body:   bytes.NewReader(content),
 	})
 	if err != nil {
-		return "failed to upload file", fmt.Errorf("%v", err)
+		return fmt.Errorf("failed to upload, %v", err)
 	}
-	s3UploadResult := finalFileName + "file successfully uploaded in S3"
-	return s3UploadResult, nil
+	fmt.Println(finalFileName + "file successfully uploaded in S3")
+	return nil
 }
 
 // S3에서 파일 다운로드 후 json 데이터를 파싱하여 golang 자료 구조에 맞게 변환
@@ -160,7 +143,7 @@ func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, err
 		Key:    aws.String("bmt/subway_information.json"),
 	})
 	if err != nil {
-		log.Printf("Couldn't get object. Here's why: %v\n", err)
+		log.Printf("Couldn't get object. Here's why: %v", err)
 		return nil, err
 	}
 
@@ -227,8 +210,8 @@ func HandleRequest(_ context.Context) (string, error) {
 	start := time.Now()
 
 	staticProvider := credentials.NewStaticCredentialsProvider(
-		AWS_ACCESS_KEY,
-		AWS_SECRET_KEY,
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
 		"")
 
 	sdkConfig, err := config.LoadDefaultConfig(
@@ -285,13 +268,13 @@ func HandleRequest(_ context.Context) (string, error) {
 		}
 
 		// 정리한 정보를 json 파일 형식으로 저장 ("년_월_일_timetable_호선이름.json")
-		finalFilename, lambdaFileName := makingFinalFileName(lineNum)
-		writeFile(lambdaFileName, data)
+		finalFilename := makingFinalFileName(lineNum)
 
 		// 파일을 S3에 업로드
-		s3UploadResult, _ := S3Uploader(lambdaFileName, finalFilename)
-		fmt.Println(s3UploadResult)
-
+		err := S3Uploader(data, basics, finalFilename)
+		if err != nil {
+			fmt.Printf("S3Uploader failed, %v", err)
+		}
 	}
 
 	end := time.Since(start)
