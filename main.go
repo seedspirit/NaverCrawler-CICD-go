@@ -54,6 +54,7 @@ func checkErr(err error) {
 // AWS S3 사용을 위한 credential 설정 & client 생성
 func AWSConfigure() BucketBasics {
 	staticProvider := credentials.NewStaticCredentialsProvider(
+		// 아래 키들은 비활성화 했음...
 		"AKIASUBPVZPZ5UEXUOFU",
 		"i5bV0MmEX2PEGr+flLlY/7VXdozkfL9OEZsrT9ii",
 		"")
