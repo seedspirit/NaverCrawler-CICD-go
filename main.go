@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -54,9 +53,8 @@ func checkErr(err error) {
 // AWS S3 사용을 위한 credential 설정 & client 생성
 func AWSConfigure() BucketBasics {
 	staticProvider := credentials.NewStaticCredentialsProvider(
-		// 아래 키들은 비활성화 했음...
-		"AKIASUBPVZPZ5UEXUOFU",
-		"i5bV0MmEX2PEGr+flLlY/7VXdozkfL9OEZsrT9ii",
+		"AWS_KEY",
+		"AWS_SECRET_KEY",
 		"")
 
 	sdkConfig, err := config.LoadDefaultConfig(
@@ -74,16 +72,20 @@ func AWSConfigure() BucketBasics {
 // struct를 json 형태로 변환 후 makingFileName에서 나온 이름으로 S3에 파일 업로드
 func S3Uploader(data []map[string]string, basics BucketBasics, finalFileName string) error {
 	// data가 struct 형태일때는 이상하게 marshal이 되더니, map으로 바꾸니까 한방에 marshal이 잘 됨. 이유가 뭘까?
-	content, err := json.Marshal(data)
+	tmp, err := json.Marshal(data)
 	if err != nil {
 		log.Fatalln("JSON marshaling failed: %s", err)
 	}
+	// Elastic에 넣기 위해 데이터 형식 변경
+	justString := string(tmp)
+	content := strings.Replace(justString, "},{", "}\n{", -1)
+	content = strings.Trim(content, "[]")
 
 	// json 바이트 스트림을 S3에 업로드
 	_, err = basics.S3Client.PutObject(context.TODO(), &s3.PutObjectInput{
 		Bucket: aws.String("bucketestmy"),
-		Key:    aws.String("bmt/" + finalFileName),
-		Body:   bytes.NewReader(content),
+		Key:    aws.String(finalFileName),
+		Body:   strings.NewReader(content),
 	})
 	if err != nil {
 		return fmt.Errorf("failed to upload, %v", err)
@@ -95,7 +97,7 @@ func S3Uploader(data []map[string]string, basics BucketBasics, finalFileName str
 // S3에서 파일 다운로드 후 json 데이터를 파싱하여 golang 자료 구조에 맞게 변환
 func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, error) {
 	result, err := basics.S3Client.GetObject(context.TODO(), &s3.GetObjectInput{
-		Bucket: aws.String("bucketestmy"),
+		Bucket: aws.String("subway-timetables-bmt"),
 		Key:    aws.String("bmt/subway_information.json"),
 	})
 	if err != nil {
@@ -118,7 +120,7 @@ func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, err
 }
 
 // chromedp 설정 & 홈페이지 접속 후 시간표 탭 클릭하여 타겟 페이지 접속
-func getHTMLContents(URL string, lineNum string, stationNm string) string {
+func getHTMLContents(URL string) string {
 	// settings for crawling
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.NoSandbox,
@@ -223,7 +225,9 @@ func runCrawler(val map[string]interface{}, baseURL string, lineNum string) {
 	naverCode := int(val["naverCode"].(float64)) // 왜인지 모르겠지만 처음 파일에서 interface로 값 가져올 때 float64로 가져와짐
 	stationNm := val["stationNm"].(string)
 	URL := baseURL + strconv.Itoa(naverCode) + "/home"
-	htmlContent := getHTMLContents(URL, lineNum, stationNm)
+
+	// 타깃 페이지에 접속하여 outerHMTL 획득
+	htmlContent := getHTMLContents(URL)
 
 	// 페이지 소스 크롤링 & 필요한 정보 정리하기
 	crawler(htmlContent, lineNum, stationNm)
@@ -243,8 +247,8 @@ func HandleRequest(_ context.Context) (string, error) {
 		targetLines = append(targetLines, k)
 	}
 	sort.Strings(targetLines)
-	// Lambda timeout으로 인해 일부만 크롤링: 1호선~5호선 / 6호선~신림선 (6분)
-	targetLines = targetLines[:5]
+	// Lambda timeout으로 인해 일부만 크롤링: 1호선~5호선 (11분 41초) / 6호선~신림선 (14분 34초)
+	targetLines = targetLines[5:]
 
 	// 각 역의 정보를 바탕으로 크롤링 시작. for문을 돌며 호선 이름과 그 호선에 해당하는 역 정보 가져오고 -> 그거 바탕으로 크롤링
 	var baseURL string = "https://pts.map.naver.com/end-subway/ends/web/"
