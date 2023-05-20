@@ -83,7 +83,7 @@ func S3Uploader(data []map[string]string, basics BucketBasics, finalFileName str
 
 	// json 바이트 스트림을 S3에 업로드
 	_, err = basics.S3Client.PutObject(context.TODO(), &s3.PutObjectInput{
-		Bucket: aws.String("bucketestmy"),
+		Bucket: aws.String("BucketName"),
 		Key:    aws.String(finalFileName),
 		Body:   strings.NewReader(content),
 	})
@@ -97,8 +97,8 @@ func S3Uploader(data []map[string]string, basics BucketBasics, finalFileName str
 // S3에서 파일 다운로드 후 json 데이터를 파싱하여 golang 자료 구조에 맞게 변환
 func S3Downloader(basics BucketBasics) (map[string][]map[string]interface{}, error) {
 	result, err := basics.S3Client.GetObject(context.TODO(), &s3.GetObjectInput{
-		Bucket: aws.String("subway-timetables-bmt"),
-		Key:    aws.String("bmt/subway_information.json"),
+		Bucket: aws.String("BucketName"),
+		Key:    aws.String("Key"),
 	})
 	if err != nil {
 		log.Printf("Couldn't get object. Here's why: %v", err)
