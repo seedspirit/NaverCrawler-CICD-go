@@ -126,7 +126,6 @@ func getHTMLContents(URL string) string {
 		chromedp.NoSandbox,
 		chromedp.Flag("disable-setuid-sandbox", true),
 		chromedp.Flag("disable-dev-shm-usage", true),
-		chromedp.Flag("single-process", true),
 		chromedp.Flag("no-zygote", true),
 	)
 
